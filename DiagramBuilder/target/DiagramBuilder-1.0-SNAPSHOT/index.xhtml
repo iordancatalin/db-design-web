@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<h:outputScript library="js" name="main.js" />
+</h:head>
+<h:body>
+	<h:form id="mainForm" styleClass="form-style">
+		<h:panelGroup styleClass="wrapper" layout="block" id="wrapper">
+			<h:panelGroup layout="block" styleClass="meniu-button-style">
+				<button type="button" class="meniu-button" onclick="view()">
+					<i class="fa fa-bars fa-2x style-fa color-color"></i>
+				</button>
+			</h:panelGroup>
+			<h:panelGroup styleClass="view-style view-save view">
+				<h:panelGroup styleClass="forms-style">
+					<h:outputText value="Save" styleClass="output-text-style" />
+				</h:panelGroup>
+				<h:panelGroup styleClass="move-style move-forms color-back"></h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup styleClass="view-style view-load view">
+				<h:panelGroup styleClass="forms-style">
+					<h:outputText value="Load" styleClass="output-text-style" />
+				</h:panelGroup>
+				<h:panelGroup styleClass="move-style move-forms color-back"></h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup styleClass="view-style view-login view">
+				<h:panelGroup styleClass="forms-style" id="login">
+					<h:outputText value="Log in" styleClass="output-text-style" />
+				</h:panelGroup>
+				<h:panelGroup styleClass="move-style move-forms color-back"></h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup styleClass="view-style view-logout">
+				<h:panelGroup styleClass="forms-style" id="logout">
+					<h:outputText value="Log out" styleClass="output-text-style" />
+				</h:panelGroup>
+				<h:panelGroup styleClass="move-style move-forms color-back"></h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup styleClass="view-style">
+				<h:panelGroup styleClass="forms-style" id="formPanel">
+					<h:outputText value="Forms" styleClass="output-text-style" />
+					<i class="fa fa-arrow-down view-icon" id="formsArrow"></i>
+				</h:panelGroup>
+				<h:panelGroup styleClass="move-style move-forms color-back"></h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="shape-panel color-back"
+				id="shapesCont">
+				<h:panelGroup layout="block" styleClass="shp-panel" id="shpPanel">
+					<h:panelGroup layout="block" styleClass="align rectangle-container"
+						id="rectCont">
+						<h:panelGroup layout="block"
+							styleClass="rectangle line-draggable drop color-back color-border"
+							id="rect0">
+						</h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="align rhombus-container"
+						id="diamondContainer">
+						<h:panelGroup layout="block"
+							styleClass="rhombus line-draggable drop color-back color-border"
+							id="diamond1">
+
+						</h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="align circle-container"
+						id="circleCont">
+						<h:panelGroup layout="block"
+							styleClass="circle line-draggable drop color-back color-border"
+							id="circle2">
+
+						</h:panelGroup>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup styleClass="view-style view-lines">
+				<h:panelGroup styleClass="forms-style" id="linePanel">
+					<h:outputText value="Lines" styleClass="output-text-style" />
+					<i class="fa fa-arrow-down view-icon" id="linesArrow"></i>
+
+				</h:panelGroup>
+				<h:panelGroup styleClass="move-style move-forms color-back"></h:panelGroup>
+			</h:panelGroup>
+
+			<h:panelGroup layout="block" styleClass="line-container color-back"
+				id="lineContainer">
+				<h:panelGroup styleClass="lines" layout="block">
+					<button class="line" type="button" onclick="lineType = 'solid';"
+						id="solidButton">
+						<div class="solid-line-style color-border" />
+					</button>
+
+					<button class="line" type="button" onclick="lineType = 'dotted';">
+						<div class="dotted-line-style color-border" />
+					</button>
+					<button class="line" type="button" onclick="lineType = 'dashed';">
+						<div class="dashed-line-style color-border" />
+					</button>
+				</h:panelGroup>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="view-style view-colors">
+				<h:panelGroup styleClass="forms-style" id="colorPanel">
+					<h:outputText value="Colors" styleClass="output-text-style" />
+					<i class="fa fa-arrow-down view-icon" id="colorsArrow"></i>
+				</h:panelGroup>
+				<h:panelGroup styleClass="move-style move-forms color-back"></h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="color-style color-back"
+				id="colorCont">
+				<h:panelGroup layout="block" styleClass="colors-panel">
+					<h:panelGroup layout="block" styleClass="color-panel"
+						id="blueLight">
+						<h:panelGroup styleClass="blue-light-container culoare"></h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="color-panel" id="red">
+						<h:panelGroup styleClass="red-container culoare"></h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="color-panel" id="blue">
+						<h:panelGroup styleClass="blue-container culoare"></h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="color-panel" id="green">
+						<h:panelGroup styleClass="green-container culoare"></h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="color-panel" id="orange">
+						<h:panelGroup styleClass="orange-container culoare"></h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="color-panel" id="black">
+						<h:panelGroup styleClass="black-container culoare"></h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="color-panel" id="pink">
+						<h:panelGroup styleClass="pink-container culoare"></h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="color-panel" id="gray">
+						<h:panelGroup styleClass="gray-container culoare"></h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="color-panel"
+						id="chartreuse">
+						<h:panelGroup styleClass="chartreuse-container culoare"></h:panelGroup>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup class="workspace-container" id="workspace">
+				<h:panelGroup styleClass="max-mini" layout="block">
+					<h:panelGroup styleClass="size">
+						<button type="button" class="size-button-style"
+							onclick="minimize()">-</button>
+					</h:panelGroup>
+					<h:panelGroup styleClass="size default-style">
+						<button type="button" class="size-button-style"
+							onclick="original()">o</button>
+					</h:panelGroup>
+					<h:panelGroup styleClass="size max-style">
+						<button type="button" class="size-button-style"
+							onclick="maximize()">+</button>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+
+		<h:panelGroup layout="block" styleClass="line-color-container"
+			id="superColor">
+			<h:panelGroup styleClass="left-side-color">
+			<h:panelGroup layout="block" styleClass="color-panel-super"
+					id="BLUELIGHT">
+					<h:panelGroup
+						styleClass="blue-light-container culoare super-culoare"></h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="color-panel-super" id="RED">
+					<h:panelGroup styleClass="red-container culoare super-culoare"></h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="color-panel-super"
+					id="BLUE">
+					<h:panelGroup styleClass="blue-container culoare super-culoare"></h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+			
+			<h:panelGroup layout="block" styleClass="middle-side-color">
+				<h:panelGroup layout="block" styleClass="color-panel-super"
+					id="GREEN">
+					<h:panelGroup styleClass="green-container culoare super-culoare"></h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="color-panel-super"
+					id="ORANGE">
+					<h:panelGroup styleClass="orange-container culoare"></h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="color-panel-super" id="BLACK">
+					<h:panelGroup styleClass="black-container culoare"></h:panelGroup>
+				</h:panelGroup>				
+			</h:panelGroup>
+			
+			<h:panelGroup styleClass="right-side-color">
+				<h:panelGroup layout="block" styleClass="color-panel-super" id="PINK">
+					<h:panelGroup styleClass="pink-container culoare"></h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="color-panel-super" id="GRAY">
+					<h:panelGroup styleClass="gray-container culoare"></h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="color-panel-super"
+					id="CHARTREUSE">
+					<h:panelGroup styleClass="chartreuse-container culoare"></h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+
+		<ui:include src="/WEB-INF/popup/login.xhtml" />
+		<ui:include src="/WEB-INF/popup/loader.xhtml" />
+	</h:form>
+</h:body>
+</html>

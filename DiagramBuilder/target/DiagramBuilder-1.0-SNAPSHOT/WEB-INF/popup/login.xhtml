@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+	
+	<h:panelGroup layout="block" styleClass="log-in-style" id="container">
+		<h:panelGroup layout="block" styleClass="log-in-panel color-back" id="logPanel">
+			<h:inputHidden value="#{diagramBean.raspuns}" id="raspuns"/>
+			<h:panelGroup layout="block" styleClass="message-area" id="messagesArea">
+				<h:messages showSummary="true" showDetail="false" styleClass="message-style"/>
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="user-input">
+				<h:outputLabel value="Name" for="userName" styleClass="label-style"/>
+				<h:inputText value="#{diagramBean.userName}" id="userName" styleClass="input-style" required="true" requiredMessage="Enter Name"/>
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="user-input">
+				<h:outputLabel value="Password" for="userPassword" styleClass="label-style"/>
+				<h:inputSecret value="#{diagramBean.password}" id="userPassword" styleClass="input-style" required="true" requiredMessage="Enter Password"/>
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="button-panel">
+				<h:commandButton value="Log in" styleClass="log-in-button" onclick="displayLoader()" action="#{diagramBean.doLogin()}">
+					<f:ajax execute="mainForm:userName mainForm:userPassword" 
+					render="mainForm:messagesArea mainForm:raspuns mainForm:loginPanel mainForm:loutPanel" onevent="ajaxExec"/>
+				</h:commandButton>
+			</h:panelGroup>
+		</h:panelGroup>
+	</h:panelGroup>
+</ui:composition>

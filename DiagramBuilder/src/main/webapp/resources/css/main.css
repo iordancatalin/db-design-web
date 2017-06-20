@@ -1,0 +1,748 @@
+@CHARSET "UTF-8";
+
+html {
+	height: 100vh;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	min-height: 100%;
+	background-color: #c1d7d7;
+	overflow: hidden;
+}
+
+.form-style {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	display: block;
+	height: 100vh;
+}
+
+.view-style {
+	position: relative;
+	top: 50%;
+	display: block;
+	width: 13%;
+	height: 5%;
+	z-index: 2;
+	background-color: #e8e8e8;
+	cursor: pointer;
+}
+
+.view-style:HOVER {
+	box-shadow: 2px 2px 10px black;
+}
+
+.view-lines {
+	top: 51%;
+}
+
+.view-colors {
+	top: 52%;
+}
+
+.shape-container {
+	display: inline-block;
+	width: 5%;
+	height: 100%;
+}
+
+.view-container {
+	position: absolute;
+	top: 40%;
+	left: 0;
+	height: 30%;
+	width: 15%;
+	background-color: red;
+}
+
+.forms-style {
+	display: inline-block;
+	width: 95%;
+	height: 100%;
+	background-color: #e8e8e8;
+}
+
+.output-text-style {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-block;
+	width: 85%;
+	height: 100%;
+	text-align: center;
+	font-size: x-large;
+}
+
+.view-icon {
+	position: absolute;
+	left: 80%;
+	top: 25%;
+}
+
+.move-style {
+	display: inline-block;
+	width: 5%;
+	height: 100%;
+	background-color: #42c5f4;
+}
+
+.color-style {
+	display: none;
+	position: relative;
+	top: 52%;
+	width: 13%;
+	height: 13%;
+	background-color: #42c5f4;
+	z-index: 2;
+}
+
+.colors-panel {
+	position: relative;
+	top: 1%;
+	left: 1%;
+	width: 98%;
+	height: 98%;
+	background-color: white;
+	border-radius: 5px;
+	overflow: auto;
+}
+
+.shape-panel {
+	display: none;
+	position: relative;
+	top: 50%;
+	width: 13%;
+	height: 15%;
+	background-color: #42c5f4;
+	z-index: 2;
+}
+
+.shapes {
+	display: inline-block;
+	width: 90%;
+	height: 100%;
+	background-color: #42c5f4;
+}
+
+.line-container {
+	display: none;
+	width: 100%;
+	height: 5%;
+	background-color: red;
+}
+
+.icon-cont {
+	position: relative;
+	top: 45%;
+	width: 100%;
+	height: 10%;
+	background-color: #42c5f4;
+	cursor: pointer;
+	color: white;
+}
+
+.shp-panel {
+	position: relative;
+	top: 1%;
+	left: 1%;
+	width: 98%;
+	height: 98%;
+	background-color: white;
+	border-radius: 5px;
+}
+
+.wrapper {
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	background-color: white;
+	z-index: 0;
+}
+
+.workspace-container {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	display: block;
+	width: 100%;
+	height: 100%;
+	max-width: 500%;
+	max-height: 500%;
+	background-color: white;
+}
+
+.align {
+	margin-right: 2%;
+}
+
+.align:LAST-CHILD {
+	margin-right: 0;
+}
+
+.rectangle-container {
+	position: relative;
+	display: inline-block;
+	width: 32%;
+	height: 45%;
+}
+
+.rectangle-container:HOVER {
+	box-shadow: 2px 2px 10px black;
+}
+
+.rectangle {
+	position: relative;
+	left: 20%;
+	top: 20%;
+	width: calc(60% - 2px);
+	border: 1px solid #42c5f4;
+	height: 50%;
+	cursor: pointer;
+	background-color: #42c5f4;
+	border-radius: 4px;
+}
+
+.rhombus-container {
+	position: relative;
+	display: inline-block;
+	width: 32%;
+	height: 45%;
+}
+
+.rhombus-container:HOVER {
+	box-shadow: 2px 2px 10px black;
+}
+
+.rhombus {
+	position: relative;
+	left: 30%;
+	top: 20%;
+	cursor: pointer;
+	width: 45%;
+	height: 50%;
+	background-color: #42c5f4;
+	transform: rotate(46deg);
+}
+
+.circle-container {
+	position: relative;
+	display: inline-block;
+	width: 32%;
+	height: 45%;
+}
+
+.circle-container:HOVER {
+	box-shadow: 2px 2px 10px black;
+}
+
+.circle {
+	position: relative;
+	left: 20%;
+	top: 20%;
+	cursor: pointer;
+	width: 55%;
+	background-color: #42c5f4;
+	height: 55%;
+	border-radius: 50%;
+}
+
+.title-input-style {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #42c5f4;
+	height: 15%;
+	color: white;
+	font-family: 'Times New Roman';
+	text-align: center;
+	border: 0;
+	border-radius: 2px;
+}
+
+.description-input-style {
+	position: absolute;
+	top: 15%;
+	left: 0;
+	outline: none;
+	width: 100%;
+	padding: 0;
+	height: 85%;
+	font-family: 'Times New Roman';
+	text-align: left;
+	border: 0;
+	resize: none;
+	border-radius: 2px;
+}
+
+.transparent-description {
+	position: absolute;
+	top: 15%;
+	left: 0;
+	background-color: white;
+	width: 100%;
+	height: 85%;
+	opacity: 0;
+	z-index: 1;
+}
+
+.transparent-title {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	background-color: white;
+	width: 100%;
+	height: 15%;
+	opacity: 0;
+}
+
+.transparent-title-circle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	background-color: white;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+/* Lines */
+.line-container {
+	position: relative;
+	top: 51%;
+	width: 13%;
+	height: 15%;
+	z-index: 2;
+	background-color: #42c5f4;
+}
+
+.lines {
+	position: relative;
+	left: 1%;
+	top: 1%;
+	width: 98%;
+	height: 98%;
+	background-color: white;
+	border-radius: 5px;
+}
+
+.show-line {
+	position: fixed;
+	top: 5%;
+	left: 25%;
+	height: 2.5%;
+	width: 50%;
+	background-color: #42c5f4;
+	border-bottom-left-radius: 30%;
+	border-bottom-right-radius: 30%;
+}
+
+.button-container {
+	position: relative;
+	width: 4%;
+	top: 0;
+	cursor: pointer;
+	height: 90%;
+	left: 50%;
+}
+
+.lines-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.list-line {
+	display: inline-block;
+	width: 23%;
+	height: 100%;
+}
+
+.line {
+	display: inline-block;
+	position: relative;
+	left: 1%;
+	width: 30%;
+	height: 35%;
+	background-color: white;
+	outline: none;
+	border: 0;
+	text-align: center;
+	cursor: pointer;
+}
+
+.line:HOVER {
+	box-shadow: 2px 2px 10px black;
+}
+
+/* Lines */
+
+/* Scroll bar */
+*::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 10px #99ffff;
+	border-radius: 1%;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar {
+	width: 6px;
+	background-color: #F5F5F5;
+	height: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+	border-radius: 0;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: #e8e8e8;
+}
+
+/* Scroll bar */
+
+/*Circle*/
+.input-circle {
+	position: absolute;
+	top: 40%;
+	left: 3%;
+	width: 90%;
+	height: 20%;
+	resize: none;
+	border: 0;
+	outline: none;
+	color: black;
+}
+
+.transparent-title-circle {
+	position: absolute;
+	top: 25%;
+	left: 7%;
+	width: 80%;
+	height: 50%;
+	background-color: black;
+	z-index: 2;
+}
+/*Circle*/
+.log-in-style {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 1;
+	display: none;
+}
+
+.log-in-panel {
+	position: absolute;
+	top: 0;
+	left: 30%;
+	width: 40%;
+	height: 40%;
+	background-color: #42c5f4;
+}
+
+.message-area {
+	height: 24.5%;
+	width: 99%;
+	margin-left: 0.5%;
+	margin-top: 0.5%;
+	background-color: white;
+}
+
+.user-input {
+	height: 25%;
+	width: 99%;
+	margin-left: 0.5%;
+	background-color: white;
+}
+
+.button-panel {
+	position: relative;
+	height: 24.5%;
+	width: 99%;
+	left: 0.5%;
+	bottom: 0.5%;
+	background-color: white;
+}
+
+.label-style {
+	position: relative;
+	left: 10%;
+	display: block;
+	width: 80%;
+}
+
+.input-style {
+	display: block;
+	position: relative;
+	left: 10%;
+	border: 1px solid black;
+	width: 80%;
+	height: 50%;
+	border-radius: 5px;
+	outline: none;
+}
+
+.log-in-button {
+	position: absolute;
+	top: 20%;
+	left: 40%;
+	width: 20%;
+	padding: 2%;
+	border: 0;
+	border-radius: 5px;
+	background-color: #e8e8e8;
+	cursor: pointer;
+}
+
+.max-mini {
+	position: fixed;
+	right: 15px;
+	bottom: 15px;
+	width: 8%;
+	height: 3%;
+	z-index: 100;
+}
+
+.size {
+	display: inline-block;
+	width: 33.3%;
+	height: 100%;
+}
+
+.size-button-style {
+	display: block;
+	height: 100%;
+	border: 0;
+	width: 100%;
+	cursor: pointer;
+	outline: none;
+}
+
+.size-button-style:HOVER {
+	box-shadow: 2px 2px 10px black;
+}
+
+.line-style:HOVER {
+	cursor: pointer;
+}
+
+.meniu-button-style {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 5%;
+	height: 4%;
+}
+
+.meniu-button {
+	display: block;
+	height: 100%;
+	width: 100%;
+	border: 0;
+	background-color: #e8e8e8;
+	cursor: pointer;
+	outline: none;
+}
+
+.view-save {
+	position: absolute;
+	top: 32%;
+	left: 0;
+	display: none;
+}
+
+.view-load {
+	position: absolute;
+	top: 38%;
+	left: 0;
+	display: none;
+}
+
+.view-login {
+	position: absolute;
+	top: 44%;
+	left: 0;
+	display: none;
+}
+
+.solid-line-style {
+	width: 100%;
+	height: 0;
+	border-top: 1px solid #42c5f4;
+}
+
+.dotted-line-style {
+	width: 100%;
+	height: 0;
+	border-top: 1px dotted #42c5f4;
+}
+
+.dashed-line-style {
+	width: 100%;
+	height: 0;
+	border-top: 1px dashed #42c5f4;
+}
+
+.style-fa {
+	color: #42c5f4;
+}
+
+.color-panel {
+	position: relative;
+	display: inline-block;
+	width: 33%;
+	height: 40%;
+}
+
+.color-panel:HOVER {
+	box-shadow: 2px 2px 10px black;
+}
+
+.culoare {
+	position: absolute;
+	left: 20%;
+	top: 25%;
+	width: 60%;
+	height: 50%;
+	cursor: pointer;
+}
+
+.red-container {
+	background-color: red;
+}
+
+.blue-container {
+	background-color: blue;
+}
+
+.green-container {
+	background-color: green;
+}
+
+.orange-container {
+	background-color: orange;
+}
+
+.black-container {
+	background-color: black;
+}
+
+.blue-light-container {
+	background-color: #42c5f4;
+}
+
+.chartreuse-container {
+	background-color: chartreuse;
+}
+
+.gray-container {
+	background-color: gray;
+}
+
+.pink-container {
+	background-color: pink;
+}
+
+.line-color-container {
+	position: absolute;
+	display: none;
+	width: 8%;
+	z-index: 5;
+	height: 0;
+}
+
+.left-side-color {
+	display: inline-block;
+	width: 33.3%;
+	height: 100%;
+}
+
+.middle-side-color{
+	display: inline-block;
+	width: 33.3%;
+	height: 100%;
+}
+
+.right-side-color {
+	display: inline-block;
+	width: 33.3%;
+	height: 100%;
+}
+
+.color-panel-super {
+	position: relative;
+	display: block;
+	height: 25%;
+}
+
+.color-panel-super:HOVER {
+	box-shadow: 2px 2px 10px black;
+}
+
+.loader-container {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.2);
+	height: 100%;
+}
+
+.loader {
+	position: absolute;
+	left: 43%;
+	top: 40%;
+	height: 120px;
+	width: 120px;
+	border: 12px solid white;
+	border-radius: 50%;
+	border-top: 12px solid #42c5f4;
+	animation: load 2s linear infinite reverse;
+}
+
+@keyframes load { 
+	0% {transform: rotate(360deg)}
+}
+.message-style {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	color: red;
+}
+
+.view-logout {
+	position: absolute;
+	top: 44%;
+	left: 0;
+	display: none;
+}
+
+.log-out-button {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 95%;
+	height: 100%;
+	border: 0;
+	font-size: x-large;
+	text-align: center;
+	cursor: pointer;
+	background-color: #e8e8e8;
+}
