@@ -1,0 +1,11 @@
+@import "../../style-util/main_font";
+@import "../../style-util/mixin_transition";
+@import "../../style-util/popup-style.scss";
+
+.load-container {
+  min-width: 320px;
+}
+
+.wrapper-container {
+  min-height: 300px;
+}

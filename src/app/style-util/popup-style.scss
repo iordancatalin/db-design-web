@@ -1,0 +1,27 @@
+$bg-header: #e4ebf1;
+$text-header: #323a45;
+$bg-blue: rgb(0, 75, 196) !important;
+
+.bg-header {
+  background-color: $bg-header;
+}
+
+.text-header {
+  color: #323a45;
+}
+
+.popup {
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+}
+
+.bg-blue {
+  background-color: $bg-blue;
+}
+
+.popup-container {
+  min-width: 400px;
+  overflow: hidden;
+}

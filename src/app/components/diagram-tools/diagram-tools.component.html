@@ -1,0 +1,21 @@
+<div class="float-left position-absolute h-100 overflow-auto app-tools-container" style="background-color: #e8e8e8 !important; top: 40px;">
+  <div class="pt-5 tools-panel mt-5">
+    <button type="button" *ngFor="let option of diagramTools; let i = index;"
+            class="m-3 position-relative btn-tool p-0 rounded-circle outline-none border-0 cursor-pointer d-flex justify-content-center align-items-center"
+            (click)="toolClick(option)"
+            [ngClass]="{'pulse': option.active, 'hide-tool': !enableTools}"
+            [style.transitionDelay]="(i+1)/10 + 's'">
+      <div class="tool-icon float-left d-flex justify-content-center align-items-center">
+        <img *ngIf="!option.active || option.activeIcon === null" [src]="'../../../assets/icons/' + option.icon"
+             class="icon">
+
+        <img *ngIf="option.active && option.activeIcon !== null" [src]="'../../../assets/icons/' + option.activeIcon"
+             class="icon">
+      </div>
+      <div class="tool-description d-flex float-left justify-content-center align-items-center"
+           [ngClass]="{'text-secondary': !option.active, 'text-white': option.active}">
+        <span>{{ option.description }}</span>
+      </div>
+    </button>
+  </div>
+</div>

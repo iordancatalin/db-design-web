@@ -1,0 +1,27 @@
+<div class="w-100 h-100 d-flex justify-content-center align-items-center flex-column"
+  style="background-color: #e8e8e8;">
+  <div style="font-size: 2.5rem;" class="text-secondary">
+    <p>Please select a diagram : )</p>
+  </div>
+  <div class="d-flex justify-content-center align-items-center mt-2">
+    <button class="btn row rounded-0 p-0 border-0 m-1 pick-button" (click)="createDiagram($event)">
+      <div class="col col-3 bg-button text-white p-2 float-left border-right border-white">
+        <img src="../../../assets/icons/new-document (1).svg" class="pick-icon">
+      </div>
+      <div class="col col-9 float-left bg-button p-2 text-white">
+        <span>Create diagram</span>
+      </div>
+    </button>
+
+    <button (click)="showLoadStorage()" class="btn row rounded-0 p-0 border-0 m-1 pick-button">
+      <div class="col col-3 bg-button text-white p-2 float-left border-right border-white">
+        <img src="../../../assets/icons/database.svg" class="pick-icon">
+      </div>
+      <div class="col col-9 float-left bg-button p-2 text-white">
+        <span>Load from storage</span>
+      </div>
+    </button>
+  </div>
+</div>
+<app-load-storage *ngIf="showLoadFromStorage" (close)="closeLoadFromStorage()" (select)="diagramLoaded($event)">
+</app-load-storage>

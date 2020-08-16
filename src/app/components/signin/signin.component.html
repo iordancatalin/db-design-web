@@ -1,0 +1,128 @@
+<div
+  class="h-100 position-relative overflow-auto"
+  style="background-color: #f7f7f7"
+>
+  <div class="container position-relative sm-device">
+    <div class="mt-md-5 d-flex justify-content-center align-items-center">
+      <div
+        class="pt-4 pb-4 pl-5 pr-5 bg-white rounded h-sm w-sm"
+        style="box-shadow: 2px 2px 10px black"
+      >
+        <div class="p-2 text-center text-secondary">
+          <h2
+            class="border-bottom p-1"
+            style="border-color: rgba(0, 0, 0, 0.2)"
+          >
+            Authentication
+          </h2>
+        </div>
+        <div
+          *ngIf="_errorMessage"
+          class="alert alert-danger text-danger text-center"
+        >
+          <span>{{ _errorMessage }}</span>
+        </div>
+        <form
+          [formGroup]="formGroup"
+          [ngClass]="{ 'mt-5': !_errorMessage, 'mt-3': _errorMessage }"
+          (submit)="submit($event)"
+        >
+          <div class="form-group">
+            <mat-form-field class="form-input">
+              <input
+                matInput
+                class="w-100"
+                placeholder="Enter your email"
+                formControlName="email"
+              />
+              <mat-error *ngIf="(email.touched || email.dirty) && email.invalid"
+                >Not a valid email</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="form-input">
+              <input
+                matInput
+                type="password"
+                class="w-100"
+                formControlName="password"
+                placeholder="Password"
+              />
+              <mat-error
+                *ngIf="(password.touched || password.dirty) && password.invalid"
+              >
+                Minimum 6 character
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div
+            class="form-group pt-1 pb-3 d-flex justify-content-center align-items-center border-bottom"
+            style="border-color: #495057"
+          >
+            <button
+              mat-raised-button
+              type="submit"
+              class="btn bg-primary text-white border-0 outline-none"
+              [disabled]="!formGroup.valid"
+            >
+              Sign in
+            </button>
+          </div>
+          <div
+            class="social-container form-group d-flex justify-content-center align-items-center"
+          >
+            <button
+              (click)="signInWithGoogle()"
+              mat-raised-button
+              type="button"
+              class="outline-none bg-danger text-white row m-0 border-0 w-100 d-flex justify-content-center align-items-center social-btn"
+            >
+              <span class="col col-1">
+                <fa name="google"></fa>
+              </span>
+              <span class="col col-11">
+                <span>Google</span>
+              </span>
+            </button>
+            <button
+              (click)="signInWithFacebook()"
+              mat-raised-button
+              type="button"
+              class="outline-none ml-2 bg-primary row m-0 text-white border-0 w-100 d-flex justify-content-center align-items-center social-btn"
+            >
+              <span class="col col-1">
+                <fa name="facebook"></fa>
+              </span>
+              <span class="col col-11">
+                <span>Facebook</span>
+              </span>
+            </button>
+          </div>
+          <div
+            class="form-group d-flex justify-content-center align-items-center mt-4"
+          >
+            <span>Don't have an account?</span>
+            <a routerLink="/registration" class="ml-2">Register</a>
+          </div>
+          <div
+            class="form-group d-flex justify-content-center align-items-center"
+          >
+            <button
+              type="button"
+              class="ml-2 btn btn-link"
+              (click)="forgetPasswordActive()"
+            >
+              Forgotten the password?
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-forget-password
+  *ngIf="showResetPasswordPopup"
+  (close)="forgetPasswordInactive()"
+></app-forget-password>

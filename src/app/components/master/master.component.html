@@ -1,0 +1,11 @@
+<app-save-indicator></app-save-indicator>
+<app-navigator (atToggleShowMenu)="onNavigatorToggle($event)"></app-navigator>
+<div
+  class="float-left main-container overflow-hidden w-100 h-100"
+  [ngClass]="{
+    'extended-mode': showMenu,
+    'compressed-mode': !showMenu
+  }"
+>
+  <router-outlet></router-outlet>
+</div>

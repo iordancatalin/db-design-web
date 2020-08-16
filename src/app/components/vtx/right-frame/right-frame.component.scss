@@ -1,0 +1,13 @@
+.image-container{
+    width: 400px;
+    height: 260px;
+}
+
+.image{
+    transition: transform .3s ease-out;
+    box-shadow: 0 0 2px black;
+}
+
+.image:hover{
+    transform: scale(1.2)
+}

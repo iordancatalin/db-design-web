@@ -1,0 +1,22 @@
+@import "../../../style-util/mixin_transition";
+@import "../../../style-util/main_font";
+
+.option-btn {
+  min-width: 300px;
+  a {
+    z-index: 2;
+    color: white !important;
+  }
+  @include _transition(background-color, 0.4s, ease-out);
+}
+
+.option-btn:hover {
+  background-color: white;
+  a {
+    color: #343a40 !important;
+  }
+}
+
+.option-btn:hover::before {
+  width: 100% !important;
+}

@@ -1,0 +1,98 @@
+<div class="d-block position-relative h-100 w-100 bg-dark" #diagramContainerElementRef>
+  <div class="position-absolute diagram-container" tabindex="1" [id]="diagram.id" (keydown)="diagramKeydown($event)"
+    (keyup)="diagramKeyup($event)" cdkDrag (cdkDragEnded)="dragEnd($event)"
+    [ngClass]="{'transition-position': diagram.transitionPosition}" #diagramElementRef="cdkDrag"
+    [style.left.px]="diagram.position.left" [style.top.px]="diagram.position.top">
+    <div #diagramRef class="position-absolute bg-white border border-secondary db-diagram rounded" tabindex="1"
+      [id]="diagram.id + '_container'" (contextmenu)="rightClick($event)" (keyup)="diagramKeyup($event)"
+      (click)="click($event)">
+      <svg class="position-absolute w-100 h-100 svg-container" [id]="diagram.id + '_svg_container'">
+        <defs>
+          <!-- arrowhead marker definition -->
+          <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5"
+            orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" style="fill: #6c757d !important"></path>
+          </marker>
+
+          <marker id="arrow-focus" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5"
+            orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" style="fill: #3ea8de !important"></path>
+          </marker>
+        </defs>
+        <g *ngFor="let foreignKey of diagram.htmlForeignKeys" class="outline-none" tabindex="1"
+          (click)="stopEvent($event)" (mousedown)="stopEvent($event)" (mouseup)="stopEvent($event)"
+          (focusin)="foreignKeyFocusIn(foreignKey, $event)" (focusout)="foreignKeyFocusOut(foreignKey, $event)">
+          <g *ngFor="let fragment of foreignKey.lines">
+            <line *ngIf="fragment.showMarker && !fragment.focus" [attr.x1]="fragment.start.left"
+              [attr.y1]="fragment.start.top" [attr.x2]="fragment.end.left" [attr.y2]="fragment.end.top"
+              marker-start="url(#arrow)" class="svg-line blur-line position-relative cursor-pointer">
+            </line>
+
+            <line *ngIf="fragment.showMarker && fragment.focus" [attr.x1]="fragment.start.left"
+              [attr.y1]="fragment.start.top" [attr.x2]="fragment.end.left" [attr.y2]="fragment.end.top"
+              marker-start="url(#arrow-focus)" class="svg-line focus-line position-relative cursor-pointer">
+            </line>
+
+            <line *ngIf="!fragment.showMarker" [attr.x1]="fragment.start.left" [attr.y1]="fragment.start.top"
+              [attr.x2]="fragment.end.left" [attr.y2]="fragment.end.top"
+              class="svg-line position-relative cursor-pointer"
+              [ngClass]="{'focus-line': fragment.focus, 'blur-line': !fragment.focus}">
+            </line>
+            <line [attr.x1]="fragment.start.left" [attr.y1]="fragment.start.top" [attr.x2]="fragment.end.left"
+              [attr.y2]="fragment.end.top" class="svg-line position-relative cursor-pointer super-line">
+            </line>
+          </g>
+        </g>
+      </svg>
+      <app-diagram-options [disableGenerateSQL]="!diagram.isDiagramValid()" [options]="diagramOptions"
+        (onDuplicate)="onDuplicateDiagram($event)" (onPaste)="paste($event)" (onClearAll)="clearAll($event)"
+        (onRename)="renameDiagram($event)" (onShare)="shareDiagram()" (onGenerateLink)="generateLink()"
+        (onGenerateSQL)="generateSQL()" #appDiagramOptions>
+      </app-diagram-options>
+
+      <app-db-table *ngFor="let table of diagram.htmlTables" [table]="table"
+        [alreadyExists]="tableWithNameAlreadyExists(table)" [scaleFactor]="diagram.zoom" (atDrop)="dropTable($event)"
+        (atDuplicate)="duplicateTable($event)" (atKeyup)="keyup($event)" (atTableMoved)="tableMoved($event)"
+        (atCut)="cut($event)" (atAddRelation)="addRelation($event)" (atTableClicked)="tableClicked($event)"
+        (atTableDrag)="tableDrag($event)" (atToggleEdit)="toggleEditMode($event)" (atPkChange)="pkChanged($event)"
+        (atDropColumn)="columnDrop($event)" (atDropColumns)="columnsDrop($event)"
+        (atRedrawForTable)="redrawForTable($event)" (atSearchTop)="searchTop($event)"
+        (atSearchBottom)="searchBottom($event)" (atSearchLeft)="searchLeft($event)"
+        (atSearchRight)="searchRight($event)" (atOptionsPress)="optionsPress($event)"
+         (atWidthModified)="onWidthModified($event)"></app-db-table>
+    </div>
+  </div>
+  <div *ngIf="createRelationTip" class="row m-0 p-2 text-light position-fixed fixed-bottom bg-dark m-auto rounded tip">
+    <div class="col col-9 d-inline-flex justify-content-center  align-items-center">
+      <span>Click on child table to create a relation.</span>
+    </div>
+    <div class="col col-3 d-inline-flex justify-content-center  align-items-center border-left border-white">
+      <button type="button" class="btn bg-transparent text-white box-shadow-none" (click)="abortCreateRelation($event)">
+        Abort
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="showGenerateLinkTip"
+    class="row m-0 p-2 text-light position-fixed fixed-bottom bg-dark m-auto rounded tip">
+    <div class="col col-9 d-inline-flex justify-content-center  align-items-center">
+      <span>Generated link has been copy to clipboard.</span>
+    </div>
+    <div class="col col-3 d-inline-flex justify-content-center  align-items-center border-left border-white">
+      <button type="button" class="btn bg-transparent text-white box-shadow-none" (click)="closeGenerateLinkTip()">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <app-find-table *ngIf="activeFindPopup" [position]="findTablePopupPosition" [tables]="diagram.htmlTables"
+    (close)="onFindTablePopupClose($event)" (tableSelect)="findTable($event)"></app-find-table>
+  <ng-container *ngFor="let foreignKey of diagram.htmlForeignKeys">
+    <app-relation-popup *ngIf="foreignKey.showMore" [foreignKey]="foreignKey"></app-relation-popup>
+  </ng-container>
+</div>
+
+<app-rename-diagram *ngIf="showRenamePopup" [diagram]="diagram" (close)="closeRenamePopup()"></app-rename-diagram>
+<app-share-diagram *ngIf="showSharePopup" [diagram]="diagram" (close)="closeSharePopup()"></app-share-diagram>
+<app-generate-link *ngIf="showGenerateLinkPopup" [uid]="diagram.id" (close)="copyGenerateLink()"
+  (copy)="copyGenerateLink()"></app-generate-link>

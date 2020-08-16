@@ -1,0 +1,15 @@
+<div class="p-1 mt-5">
+  <div
+    class=" text-light m-2"
+    *ngFor="let social of solidIcons"
+    [ngClass]="{ 'd-inline-block': horizontal, 'd-block': !horizontal }"
+  >
+    <a
+      [href]="social.link"
+      target="_blank"
+      class="d-flex justify-content-center align-items-center text-light icon-container rounded-circle"
+    >
+      <fa [name]="social.icon"></fa>
+    </a>
+  </div>
+</div>

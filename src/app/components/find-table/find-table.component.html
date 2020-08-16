@@ -1,0 +1,58 @@
+<div class="position-absolute positioning rounded outline-none"
+     cdkDrag
+     #popupElementRef="cdkDrag"
+     (cdkDragEnded)="dragEnded($event)"
+     tabindex="1"
+     (keyup)="keyupContainer($event)"
+     [style.left.%]="position.left"
+     [style.top.%]="position.top"
+     [ngClass]="{'transition-position': transitionPosition}">
+  <div class="find-table m-0 cursor-move">
+    <div class="p-1 row m-0">
+      <div class="col col-9 d-inline-flex justify-content-start align-items-center">
+        <span style="font-size: 14px;" class="text-white">Enter table name</span>
+      </div>
+      <div class="col col-3  d-inline-flex justify-content-end align-items-center">
+        <button type="button"
+                class="rounded-circle border-0 bg-transparent text-white cursor-pointer close-find outline-none"
+                (click)="onClose($event)"
+                (mousedown)="stopEvent($event)">
+          <fa name="close"></fa>
+        </button>
+      </div>
+    </div>
+    <div class="p-1 m-0">
+      <input type="text" placeholder="type here..."
+             class="form-control outline-none box-shadow-none border-0 search-input"
+             (keyup)="keyup($event)"
+             (mousedown)="stopEvent($event)"
+             #searchElementRef
+             id="tableName"
+             name="tableName"
+             [ngClass]="{ 'text-danger': currentTables === null || currentTables.length ===0 }"
+             [(ngModel)]="tableName">
+    </div>
+  </div>
+
+  <div #optionsElementRef>
+    <div *ngIf="currentTables !== null && currentTables.length !== 0 && keyPressed"
+         class="pt-1 pb-1 options-container">
+      <div class="w-100" *ngFor="let table of currentTables">
+        <button type="button"
+                (click)="onTableSelect(table, $event)"
+                class="row m-0 btn h-100 w-100 bg-transparent border-0 text-white text-left option outline-none box-shadow-none rounded-0">
+          <div class="col col-7 float-left d-inline-flex justify-content-start align-items-center">
+            <span>
+              {{ table.name }}
+            </span>
+          </div>
+          <div
+            class="col col-5 float-left d-inline-flex justify-content-end align-items-center text-secondary text-truncate">
+            [{{table.position.left | number: '1.0-0'}},
+            {{table.position.top | number: '1.0-0'}}]
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+import {Relation} from '../../db/accessory/relation';export class BasicForeignKeyConstraint {  public constructor(public name: string,                     public comment: string,                     public childTableId: string,                     public parentTableId: string,                     public relations: Array<Relation>) {  }}

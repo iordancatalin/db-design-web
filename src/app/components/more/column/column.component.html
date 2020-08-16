@@ -1,0 +1,133 @@
+<div class="p-1 row m-0">
+  <div class="col col-3 float-left d-inline-flex justify-content-center align-items-center p-0 col-padding">
+    <input type="text"
+           tabindex="1"
+           placeholder="name"
+           class="form-control rounded-0 pl-1 w-100 box-shadow-none"
+           [(ngModel)]="column.name"
+           [name]="column.id + '_name'"
+           (focus)="focus($event)">
+  </div>
+  <div class="col col-3 float-left d-inline-flex justify-content-center align-items-center p-0 col-padding">
+    <div class="row m-0 p-0 position-relative">
+      <div class="col col-10 p-0 overflow-hidden">
+        <input type="text"
+               tabindex="1"
+               placeholder="data type"
+               class="form-control rounded-0 pl-1 w-100 box-shadow-none"
+               [(ngModel)]="column.type.dataType"
+               [name]="column.id + '_type'"
+               (focus)="focus($event)">
+      </div>
+      <div class="col col-2 p-0">
+        <button type="button" class="border border-dark cursor-pointer h-100 text-secondary settings-button"
+                (click)="onDatatypeExpend($event)">
+          <fa name="cog"></fa>
+        </button>
+      </div>
+      <app-data-type #datatypeRef
+                     [column]="column"
+                     [isTableMore]="true"
+                     (onDatatypeMore)="onDatatypeMoreAction($event)"></app-data-type>
+    </div>
+  </div>
+  <div class="col col-3 float-left d-inline-flex justify-content-center align-items-center p-0 col-padding">
+    <input type="text"
+           tabindex="1"
+           placeholder="default value"
+           [(ngModel)]="column.defaultValue"
+           [name]="column.id + '_defaultValue'"
+           class="form-control rounded-0 pl-1 w-100 box-shadow-none"
+           (focus)="focus($event)">
+  </div>
+  <div class="col col-1 float-left d-inline-flex justify-content-center align-items-center p-0"
+       [ngClass]="{'text-warning': column.primaryKey}">
+
+    <label class="p-0 m-0"
+           tabindex="1"
+           [for]="column.id + '_pk'">
+      <fa name="key"></fa>
+    </label>
+    <input type="checkbox"
+           appPk
+           [id]="column.id + '_pk'"
+           [name]="column.id + '_pk'"
+           class="d-none">
+  </div>
+  <div
+    *ngIf="hasTableForeignKeyColumn"
+    class="col col-1 float-left d-inline-flex justify-content-center align-items-center text-secondary p-0 col-padding">
+    <span *ngIf="column.foreignKey">FK</span>
+  </div>
+  <div class="col col-1 float-left d-inline-flex justify-content-center align-items-center p-0"
+       style="padding: 0 3px 0 3px !important;">
+    <button type="button"
+            tabindex="1"
+            (click)="column.viewOptions = !column.viewOptions"
+            class="rounded border border-secondary bg-dark text-light outline-none cursor-pointer mr-1">
+      <fa name="angle-up" *ngIf="column.viewOptions"></fa>
+      <fa name="angle-down" *ngIf="!column.viewOptions"></fa>
+    </button>
+    <button type="button"
+            tabindex="1"
+            (click)="delete($event)"
+            [disabled]="column.extraColumn"
+            class="rounded border border-danger bg-danger text-light outline-none cursor-pointer ml-1">
+      <fa name="times"></fa>
+    </button>
+  </div>
+</div>
+
+
+<div class="p-1 row m-0 pl-2" *ngIf="column.viewOptions">
+  <div class="row m-0 w-100">
+    <div class="d-block col col-9 p-0" style="padding-right: 3px !important;">
+      <input type="text"
+             tabindex="1"
+             placeholder="comment"
+             [(ngModel)]="column.comment"
+             [name]="column.id + '_comment'"
+             class="form-control rounded-0 pl-1 w-100 box-shadow-none"
+             (focus)="focus($event)">
+    </div>
+  </div>
+  <div class="col col-3 p-0 float-left d-inline-flex justify-content-start align-items-center flex-row"
+       style="padding: 0 5px 0 5px !important;">
+    <label class="mr-1 mb-0 text-purple" [for]="column.id + '_nullabe'">
+      <span>Nullable</span>
+    </label>
+    <input type="checkbox"
+           style="margin-top: 3px;"
+           tabindex="1"
+           appPk
+           [(ngModel)]="column.nullable"
+           [name]="column.id + '_nullabe'"
+           [id]="column.id + '_nullabe'"
+           [disabled]="column.primaryKey">
+  </div>
+  <div class="col col-3 p-0 float-left d-inline-flex justify-content-start align-items-center flex-row"
+       style="padding: 0 5px 0 5px !important;">
+    <label class="mr-1 mb-0 text-purple float-left" [for]="column.id + '_autoincrement'">
+      <span>Autoincrement</span>
+    </label>
+    <input type="checkbox"
+           class="float-left ml-1 p-0"
+           style="margin-top: 3px;"
+           tabindex="1"
+           [(ngModel)]="column.autoincrement"
+           [name]="column.id + '_autoincrement'"
+           [id]="column.id + '_autoincrement'">
+  </div>
+  <div class="col col-3 p-0 float-left d-inline-flex justify-content-start align-items-center flex-row"
+       style="padding: 0 5px 0 5px !important;">
+    <label class="mr-1 mb-0 text-purple" [for]="column.id + '_unique'">
+      <span>Unique</span>
+    </label>
+    <input type="checkbox"
+           tabindex="1"
+           style="margin-top: 3px;"
+           [(ngModel)]="column.unique"
+           [name]="column.id + '_unique'"
+           [id]="column.id + '_unique'">
+  </div>
+</div>

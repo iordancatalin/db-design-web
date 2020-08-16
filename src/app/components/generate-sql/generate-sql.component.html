@@ -1,0 +1,38 @@
+<section class="h-100">
+  <header class="row m-0 border-bottom border-secondary">
+    <div class="col col-11 p-2 pl-4 d-inline-flex justify-content-start align-items-center">
+      <span>{{diagram.name}}</span>
+    </div>
+    <div class="col col-1 p-2 d-inline-flex justify-content-end align-items-center">
+      <button (click)="cancel()" class="btn bg-transparent outline-none box-shadow-none">
+        <fa name="times"></fa>
+      </button>
+    </div>
+  </header>
+  <main class="pl-3 pt-1 pb-1">
+    <button type="button" (click)="copyAction()"
+      class="btn btn-copy position-fixed bg-dark text-white outline-none box-shadow-none">
+      <span class="mr-2 copy-text">Copy</span>
+      <span class="ml-2">
+        <fa name="clone"></fa>
+      </span>
+    </button>
+    <textarea class="position-fixed" style="left: -4000px;" type="text" [(ngModel)]="script" #scriptRef></textarea>
+    <div #main class="p-3">
+
+    </div>
+  </main>
+
+  <div *ngIf="copyActive" class="row m-0 p-2 text-light position-fixed fixed-bottom bg-dark m-auto rounded create-table-tip">
+    <div class="col col-9 d-inline-flex justify-content-center  align-items-center">
+      <span>The script has been copied to the clipboard.</span>
+    </div>
+    <div class="col col-3 d-inline-flex justify-content-center  align-items-center border-left border-white">
+      <button type="button" class="btn bg-transparent text-white box-shadow-none" (click)="closeCopyActive()">
+        Close
+      </button>
+    </div>
+  </div>
+</section>
+
+<app-loader *ngIf="showLoader"></app-loader>

@@ -1,0 +1,117 @@
+<div *ngIf="!column.extraColumn || editableMode">
+  <div *ngIf="column.primaryKey" [id]="column.id">
+    <div class="row m-0 p-1 db-column text-secondary">
+      <div class="col text-truncate"
+        [ngClass]="{ 'col-4 pl-1 pt-0 pb-0 pr-0' : !editableMode, 'col-4' : editableMode }">
+        <fa name="exclamation" class="text-danger pr-1" *ngIf="!editableMode && dangerColumn"></fa>
+        <span *ngIf="!editableMode" [ngClass]="{'text-danger': dangerColumn}"
+          title="A column with this name already exists">{{ column.name }}</span>
+        <input type="text" [(ngModel)]="column.name" *ngIf="editableMode" placeholder="name"
+          (keydown)="stopEvent($event)" (keyup)="keyup($event)" (keypress)="stopEvent($event)"
+          (mousedown)="stopEvent($event)" (focus)="extraColumnFocus($event)" (contextmenu)="stopEvent($event)"
+          class="border border-secondary table-input">
+      </div>
+      <div class="col p-0 text-truncate "
+        [ngClass]="{ 'col-4' : !editableMode, 'col-3  overflow-visible' : editableMode}">
+        <span *ngIf="!editableMode" class="text-purple">{{ column.type.dataType }}</span>
+        <div *ngIf="editableMode" class="row m-0 p-0 position-relative">
+          <div class="col col-8 p-0 overflow-hidden">
+            <input type="text" [(ngModel)]="column.type.dataType"
+              class="border border-secondary table-input w-100 border-right-0" placeholder="data type"
+              [readonly]="column.foreignKey" (keydown)="stopEvent($event)" (keyup)="keyup($event)"
+              (keypress)="stopEvent($event)" (mousedown)="stopEvent($event)" (contextmenu)="stopEvent($event)"
+              (focus)="extraColumnFocus($event)" />
+          </div>
+          <div class="col col-4 p-0">
+            <button type="button" class="border border-dark cursor-pointer h-100 text-secondary settings-button"
+              (click)="onDatatypeExpend($event)">
+              <fa name="cog"></fa>
+            </button>
+          </div>
+
+          <app-data-type #datatypeRef [column]="column" (onDatatypeMore)="onDatatypeMoreAction($event)"></app-data-type>
+
+        </div>
+      </div>
+      <div class="col col-1 p-0 text-warning">
+        <label class="p-0 m-0" [for]="column.id + '_pk'" tabindex="1">
+          <fa name="key"></fa>
+        </label>
+        <input type="checkbox" [id]="column.id + '_pk'" (change)="pkChange($event)" [(ngModel)]="column.primaryKey"
+          appPk [htmlColumn]="column" class="d-none">
+      </div>
+      <div class="col p-0 d-inline-flex justify-content-start align-items-center"
+        [ngClass]="{'col-2 text-center': !editableMode, 'col-1': editableMode}">
+        <span *ngIf="column.foreignKey">FK</span>
+      </div>
+      <div class="col col-2 p-0 d-inline-flex justify-content-start align-items-center" *ngIf="editableMode">
+        <label [for]="column.id + '_nullable'" tabindex="1"
+          class="p-0 m-0 text-purple">{{ column.nullable ? 'NULL' : 'NOT NULL' }}</label>
+        <input type="checkbox" [id]="column.id + '_nullable'" [(ngModel)]="column.nullable" class="d-none" appPk
+          [htmlColumn]="column">
+      </div>
+      <div class="col col-1" [ngClass]="{ 'pl-0 pt-0 pb-0 pr-1' : !editableMode }">
+        <button class="btn-option border-0 text-secondary d-none" (click)="toggleOptions($event, null)">
+          <fa name="ellipsis-v"></fa>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!column.primaryKey" [id]="column.id">
+    <div class="row m-0 db-column text-secondary">
+      <div class="col text-truncate"
+        [ngClass]="{ 'col-4 pl-1 pt-0 pb-0 pr-0' : !editableMode, 'col-4' : editableMode }">
+        <fa name="exclamation" class="text-danger pr-1" *ngIf="!editableMode && dangerColumn"></fa>
+        <span *ngIf="!editableMode" [ngClass]="{'text-danger': dangerColumn}"
+          title="A column with this name already exists">{{ column.name }}</span>
+        <input type="text" [(ngModel)]="column.name" *ngIf="editableMode" class="border border-secondary table-input"
+          placeholder="name" (keydown)="stopEvent($event)" (keyup)="keyup($event)" (keypress)="stopEvent($event)"
+          (mousedown)="stopEvent($event)" (contextmenu)="stopEvent($event)" (focus)="extraColumnFocus($event)">
+      </div>
+      <div class="col p-0 position-relative text-truncate"
+        [ngClass]="{ 'col-4' : !editableMode, 'col-3 overflow-visible' : editableMode}">
+        <span *ngIf="!editableMode" class="text-purple">{{ column.type.dataType }}</span>
+        <div *ngIf="editableMode" class="row m-0 p-0">
+          <div class="col col-8 p-0 overflow-hidden">
+            <input type="text" [(ngModel)]="column.type.dataType"
+              class="border border-secondary table-input w-100 border-right-0" placeholder="data type"
+              [readonly]="column.foreignKey" (keydown)="stopEvent($event)" (keyup)="keyup($event)"
+              (keypress)="stopEvent($event)" (mousedown)="stopEvent($event)" (contextmenu)="stopEvent($event)"
+              (focus)="extraColumnFocus($event)" />
+          </div>
+          <div class="col col-4 p-0">
+            <button type="button" class="border border-dark cursor-pointer h-100 text-secondary settings-button"
+              (click)="onDatatypeExpend($event)">
+              <fa name="cog"></fa>
+            </button>
+          </div>
+
+          <app-data-type #datatypeRef [column]="column" (onDatatypeMore)="onDatatypeMoreAction($event)"></app-data-type>
+
+        </div>
+      </div>
+      <div class="col col-1 p-0 text-secondary">
+        <label class="p-0 m-0" [for]="column.id + '_pk'" tabindex="1">
+          <fa name="key"></fa>
+        </label>
+        <input type="checkbox" [id]="column.id + '_pk'" [(ngModel)]="column.primaryKey" class="d-none" appPk
+          [htmlColumn]="column" (change)="pkChange($event)">
+      </div>
+      <div class="col p-0 d-inline-flex justify-content-start align-items-center"
+        [ngClass]="{'col-2 text-center': !editableMode, 'col-1': editableMode}">
+        <span *ngIf="column.foreignKey">FK</span>
+      </div>
+      <div class="col col-2 p-0 d-inline-flex justify-content-start align-items-center" *ngIf="editableMode">
+        <label [for]="column.id + '_nullable'" tabindex="1"
+          class="p-0 m-0 text-purple">{{ column.nullable ? 'NULL' : 'NOT NULL' }}</label>
+        <input type="checkbox" [id]="column.id + '_nullable'" [(ngModel)]="column.nullable" class="d-none">
+      </div>
+      <div class="col col-1" [ngClass]="{ 'pl-0 pt-0 pb-0 pr-1' : !editableMode }">
+        <button class="btn-option border-0 text-secondary d-none" (click)="toggleOptions($event, null)">
+          <fa name="ellipsis-v"></fa>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

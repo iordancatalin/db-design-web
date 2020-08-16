@@ -1,0 +1,153 @@
+<div class="h-100 overflow-auto" style="background-color: #f7f7f7">
+  <div class="container sm-device">
+    <div class="mt-md-5 d-flex justify-content-center align-items-center">
+      <div
+        class="pt-1 pb-1 pl-5 pr-5 bg-white rounded h-sm"
+        style="box-shadow: 2px 2px 10px black"
+      >
+        <div class="p-2 text-center text-secondary">
+          <h2
+            class="border-bottom p-1"
+            style="border-color: rgba(0, 0, 0, 0.2)"
+          >
+            Registration
+          </h2>
+        </div>
+        <div
+          *ngIf="_errorMessage"
+          class="alert alert-danger text-danger text-center form-input"
+        >
+          <span>{{ _errorMessage }}</span>
+        </div>
+        <form [formGroup]="formGroup" (submit)="submit($event)">
+          <div>
+            <mat-form-field class="form-input">
+              <input
+                matInput
+                type="email"
+                class="w-100"
+                formControlName="email"
+                placeholder="Email"
+              />
+              <mat-error *ngIf="(email.touched || email.dirty) && !email.valid">
+                Invalid email format
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="form-input">
+              <input
+                matInput
+                formControlName="username"
+                placeholder="Username"
+              />
+              <mat-error
+                *ngIf="(username.touched || username.dirty) && !username.valid"
+              >
+                Minimum 3 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="form-input">
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                placeholder="Password"
+              />
+              <mat-error
+                *ngIf="(password.touched || password.dirty) && !password.valid"
+              >
+                Minimum 6 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="form-input">
+              <input
+                matInput
+                type="password"
+                formControlName="confirmPassword"
+                placeholder="Confirm password"
+              />
+              <mat-error
+                *ngIf="
+                  (confirmPassword.touched || confirmPassword.dirty) &&
+                  !confirmPassword.valid
+                "
+              >
+                Minimum 6 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div
+            class="form-group pt-1 pb-3 d-flex justify-content-center align-items-center border-bottom"
+            style="border-color: #495057"
+          >
+            <button
+              mat-raised-button
+              type="submit"
+              class="btn bg-primary text-white border-0 outline-none"
+              [disabled]="!formGroup.valid"
+            >
+              Register
+            </button>
+          </div>
+          <div
+            class="form-group d-flex justify-content-center align-items-center social-container"
+          >
+            <button
+              mat-raised-button
+              type="button"
+              (click)="signInWithGoogle()"
+              class="outline-none bg-danger text-white row m-0 border-0 w-100 d-flex justify-content-center align-items-center social-btn"
+            >
+              <span class="col col-1">
+                <fa name="google"></fa>
+              </span>
+              <span class="col col-11">
+                <span>Google</span>
+              </span>
+            </button>
+            <button
+              mat-raised-button
+              type="button"
+              (click)="signInWithFacebook()"
+              class="outline-none ml-2 bg-primary row m-0 text-white border-0 w-100 d-flex justify-content-center align-items-center social-btn"
+            >
+              <span class="col col-1">
+                <fa name="facebook"></fa>
+              </span>
+              <span class="col col-11">
+                <span>Facebook</span>
+              </span>
+            </button>
+          </div>
+          <div
+            class="form-group d-flex justify-content-center align-items-center mt-4"
+          >
+            <span>Already have an account?</span>
+            <a [routerLink]="['/sign-in']" class="ml-2">Sign in</a>
+          </div>
+          <div
+            class="form-group d-flex justify-content-center align-items-center"
+          >
+            <button
+              type="button"
+              class="ml-2 btn btn-link"
+              (click)="forgetPasswordActive()"
+            >
+              Forgotten the password?
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-forget-password
+  *ngIf="showResetPasswordPopup"
+  (close)="forgetPasswordInactive()"
+></app-forget-password>

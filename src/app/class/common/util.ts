@@ -1,0 +1,1 @@
+export class Util {  public static toJSObject(object: any): any {    return JSON.parse(JSON.stringify(object));  }}

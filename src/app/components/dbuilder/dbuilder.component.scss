@@ -1,0 +1,85 @@
+@import "../../style-util/main_font";
+@import "../../style-util/mixin_transition";
+
+.tools-container {
+  overflow: auto !important;
+  background-color: #d9d9d9;
+  @include _transition(width, .4s, ease-out);
+}
+
+.horizontal-separator {
+  left: 50%;
+  z-index: 2;
+  width: 2px;
+  cursor: ew-resize;
+}
+
+.horizontal-icon {
+  top: 45%;
+  left: -15px;
+  border-radius: 7px;
+}
+
+.vertical-separator {
+  top: 50%;
+  z-index: 2;
+  height: 2px;
+  cursor: ns-resize;
+}
+
+.vertical-icon {
+  left: 50%;
+  top: -15px;
+  border-radius: 7px;
+  transform: rotate(90deg);
+}
+
+.tools-container-visible {
+  width: 50px !important;
+  border-right: 1px solid black;
+}
+
+.tools-container-hide {
+  width: 0 !important;
+}
+
+.d-container-less {
+  width: calc(100% - 50px) !important;
+}
+
+.workspace-container {
+  width: 100%;
+  height: calc(100% - 45px);
+  @include _transition(width, .4s, ease-out);
+}
+
+.split-container {
+  width: 100%;
+  height: 100%;
+}
+
+.horizontal-separator:focus {
+  background-color: #004bc4 !important;
+  div {
+    background-color: #004bc4 !important;
+  }
+}
+
+.vertical-separator:focus {
+  background-color: #004bc4 !important;
+  div {
+    background-color: #004bc4 !important;
+  }
+}
+
+.diagrams-container {
+  height: 45px;
+  width: 100%;
+}
+
+.create-table-tip {
+  max-width: 500px;
+  bottom: 8px;
+  min-height: 50px;
+  font-size: 15px;
+}

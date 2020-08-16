@@ -1,0 +1,34 @@
+@import "../../style-util/main_font";
+@import "../../style-util/mixin_transition";
+
+.container {
+  box-shadow: 0 0 3px black;
+}
+
+.profile-image {
+  width: 140px;
+  height: 140px;
+  border: 2px solid gray;
+}
+
+.container {
+  box-shadow: 0 0 2px black;
+}
+
+.image {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.btn-edit {
+  padding: 1rem 1.25rem !important;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.edit-container {
+  left: 0;
+  top: 0;
+}
+
+.edit-container:hover .btn-edit {
+  display: flex !important;
+}

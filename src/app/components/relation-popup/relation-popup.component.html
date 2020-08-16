@@ -1,0 +1,92 @@
+<div class="position-absolute relation-container rounded" cdkDrag>
+  <div
+    class="position-sticky row p-1 m-0 bg-dark text-light cursor-move header-more"
+    cdkDragHandle
+  >
+    <div
+      class="col-9 col float-left d-inline-flex justify-content-start align-items-center"
+    >
+      <span>Relation properties</span>
+    </div>
+    <div
+      class="col-3 col float-left d-inline-flex justify-content-end align-items-center"
+    >
+      <button
+        type="button"
+        (click)="closePopup()"
+        class="btn bg-transparent text-light outline-none box-shadow-none"
+      >
+        <fa name="close"></fa>
+      </button>
+    </div>
+  </div>
+
+  <div class="p-1">
+    <div class="row mb-0 ml-0 mr-0 mt-1">
+      <div
+        class="col col-4 float-left d-inline-flex justify-content-start align-items-center"
+      >
+        <span>Relation name: </span>
+      </div>
+      <div
+        class="col col-8 float-left d-inline-flex justify-content-center align-items-center"
+      >
+        <input
+          type="text"
+          placeholder="name"
+          class="form-control rounded-0 pl-1 w-75 box-shadow-none"
+          [(ngModel)]="foreignKey.name"
+          name="foreignKeyName"
+        />
+      </div>
+    </div>
+    <div class="row mb-0 ml-0 mr-0 mt-1">
+      <div
+        class="col col-4 float-left d-inline-flex justify-content-start align-items-center"
+      >
+        <span>Comment: </span>
+      </div>
+      <div
+        class="col col-8 float-left d-inline-flex justify-content-center align-items-center"
+      >
+        <textarea
+          class="form-control rounded-0 pl-1 w-75 box-shadow-none"
+          [(ngModel)]="foreignKey.comment"
+          name="foreignKeyComment"
+          style="max-height: 37px; font-size: 13px;"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="row ml-0 mr-0 mt-1 p-1 border-bottom"
+    style="border-color: rgba(0, 0, 0, 0.3);"
+  >
+    <div class="col col-6 font-weight-bold">
+      <span>Child column(s)</span>
+    </div>
+    <div class="col col-6 font-weight-bold">
+      <span class="float-right">Parent column(s)</span>
+    </div>
+  </div>
+
+  <div class="p-2">
+    <div
+      class="row ml-0 mr-0 mt-1 p-1"
+      *ngFor="let relation of foreignKey.relations"
+    >
+      <div class="col col-5">
+        <span>{{ relation.childPart.column.name }}</span>
+      </div>
+      <div
+        class="col col-2 d-inline-flex justify-content-center align-items-center"
+      >
+        <span>&rarr;</span>
+      </div>
+      <div class="col col-5">
+        <span class="float-right">{{ relation.parentPart.column.name }}</span>
+      </div>
+    </div>
+  </div>
+</div>

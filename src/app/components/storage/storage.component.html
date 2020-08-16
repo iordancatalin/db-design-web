@@ -1,0 +1,20 @@
+<section class="container-fluid h-100 p-2">
+  <app-diagrams-header
+    (onGridClick)="gridClick($event)"
+    (onListClick)="listClick($event)"
+    (onSearch)="search($event)"
+    (onNewDiagram)="newDiagram()"
+  >
+  </app-diagrams-header>
+  <app-diagrams-body
+    [showListMode]="_showListView"
+    [diagrams]="_diagrams"
+  ></app-diagrams-body>
+</section>
+
+<app-create-diagram-popup
+  *ngIf="_showCreatePopup"
+  (close)="onClose()"
+  (newDiagram)="onNewDiagram($event)"
+>
+</app-create-diagram-popup>

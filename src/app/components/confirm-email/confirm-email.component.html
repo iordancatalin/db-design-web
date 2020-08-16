@@ -1,0 +1,33 @@
+<div class="h-100 overflow-auto" style="background-color: #f7f7f7">
+  <div class="close-container position-absolute text-white close-container p-0">
+    <a class="btn text-white close-btn h-100 w-100 p-0 d-flex justify-content-center align-items-center" routerLink="/">
+      <fa name="close"></fa>
+    </a>
+  </div>
+  <div class="container sm-device">
+    <div class="mt-md-5 d-flex justify-content-center align-items-center pt-md-5">
+      <div class="pt-1 pb-1 pl-5 pr-5 bg-white rounded h-sm" style="box-shadow: 2px 2px 10px black">
+        <div class="p-2 text-center text-secondary">
+          <h2 class="border-bottom p-1" style="border-color: rgba(0, 0, 0, 0.2)">Confirm email</h2>
+        </div>
+        <form  class="mt-2" #registrationForm="ngForm"
+              (submit)="submit($event)">
+          <div>
+            <p>You are almost there, just confirm your email address.</p>
+          </div>
+          <div class="alert alert-success text-success text-center d-none">
+            <span>Email was send</span>
+          </div>
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="form-group  mt-4">
+              <button type="button" (click)="resendEmail($event)" class="btn btn-link ml-2">Resend email</button>
+            </div>
+            <div class="form-group mt-4">
+              <a [routerLink]="['/sign-in']" class="ml-2">Sign in</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

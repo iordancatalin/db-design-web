@@ -1,0 +1,46 @@
+.notifications-container {
+  width: 470px;
+  box-shadow: 0 0 10px black;
+  border-radius: 12px;
+}
+
+header {
+  background: #141e30; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #243b55, #141e30); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #243b55,
+    #141e30
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  //  background-color: #263238;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.outline-none {
+  outline: none !important;
+}
+
+.box-shadow-none {
+  box-shadow: none !important;
+}
+
+main {
+  height: 300px;
+  overflow: auto;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.btn-option {
+  font-size: 13px;
+}
+
+.notifications-position {
+  right: -450px;
+  top: -350px;
+}
+
+.notifications {
+  z-index: 10;
+}

@@ -1,0 +1,1 @@
+import {AbstractComponent} from '../abstract-component';export abstract class AbstractPrimaryKeyConstraint extends AbstractComponent {  public constructor(id: string) {    super(id);  }}

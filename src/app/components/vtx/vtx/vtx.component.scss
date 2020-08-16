@@ -1,0 +1,30 @@
+@import "../../../style-util/mixin_transition";
+
+.frame-container {
+  background: {
+    image: url("../../../../assets/images/cool-background.png");
+    size: contain;
+    position: center;
+  }
+}
+
+.app-header {
+  overflow: hidden;
+  height: 60px !important;
+}
+
+.app-frame {
+  height: calc(100% - 6.5rem) !important;
+}
+
+.app-footer {
+  height: 20px !important;
+}
+
+.btn-nav {
+  width: 23px !important;
+  height: 5px !important;
+  cursor: pointer !important;
+  outline: none !important;
+  @include _transition(background-color, .4s, ease-out);
+}

@@ -1,0 +1,1 @@
+export class BasicCheckConstraint {  public constructor(public name: string, public expression: string) {  }}

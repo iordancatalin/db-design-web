@@ -1,0 +1,1 @@
+import {PartRelation} from './part-relation';export class HtmlRelation {  constructor(public childPart: PartRelation, public parentPart: PartRelation) {  }}

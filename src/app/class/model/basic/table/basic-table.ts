@@ -1,0 +1,1 @@
+import {Position} from '../../../graphics/position';export class BasicTable {  public constructor(public name: string,                     public primaryKeyName: string,                     public width: number,                     public comment: string,                     // public editableMode: boolean,                     public position: Position) {  }}

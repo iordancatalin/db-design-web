@@ -1,0 +1,26 @@
+<div class="col col-5 float-left d-inline-flex justify-content-center align-items-center">
+  <input type="text"
+         placeholder="name (optional)"
+         [id]="checkConstraint.id + '_name'"
+         [name]="checkConstraint.id + '_name'"
+         [(ngModel)]="checkConstraint.name"
+         (focus)="focus($event)"
+         class="form-control rounded-0 pl-1 w-100 box-shadow-none constraint-input">
+</div>
+<div class="col col-6 float-left d-inline-flex justify-content-center align-items-center">
+  <input type="text"
+         placeholder="expression"
+         [id]="checkConstraint.id + '_expression'"
+         [name]="checkConstraint.id + '_expression'"
+         [(ngModel)]="checkConstraint.expression"
+         (focus)="focus($event)"
+         class="form-control rounded-0 pl-1 w-100 box-shadow-none constraint-input">
+</div>
+<div class="col col-1 float-left d-inline-flex justify-content-center align-items-center p-0">
+  <button type="button"
+          (click)="delete($event)"
+          tabindex="1"
+          class="rounded border border-danger bg-danger text-light outline-none cursor-pointer">
+    <fa name="times"></fa>
+  </button>
+</div>

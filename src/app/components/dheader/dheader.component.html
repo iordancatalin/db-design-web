@@ -1,0 +1,85 @@
+<div class="hcontainer h-100 border-bottom border-secondary bg-header position-relative" style="z-index: 100">
+  <div class="d-inline-flex tools-menu position-relative h-100 float-left border-right border-secondary">
+    <button type="button" class="btn bg-transparent outline-none w-100 box-shadow-none tools-btn rounded-0"
+      (click)="toolsClick($event)">
+      <img src="../../../assets/icons/screwdriver-and-wrench-crossed.svg" class="icon">
+    </button>
+  </div>
+  <div class="float-left" style="width: calc(100% - 50px);">
+    <div class="position-relative overflow-hidden float-left m-0 diagrams-container h-100"
+      [style.width.%]="primaryStorage.width">
+      <div style="max-width: calc(100% - 50px);" class="h-100 float-left header-container p-1" cdkDropList
+        id="primary-list" [cdkDropListData]="primaryStorage.diagrams" [cdkDropListConnectedTo]="['additional-list']"
+        (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal">
+
+
+        <div
+          class="d-inline-flex float-left justify-content-center align-items-center diagram-header mr-1 pr-0 overflow-hidden"
+          *ngFor="let diagram of primaryStorage.diagrams"
+          [ngClass]="{'bg-active': diagram.open, 'bg-inactive': !diagram.open}" cdkDrag cdkDragLockAxis="x">
+          <button type="button"
+            class="btn bg-transparent outline-none box-shadow-none float-left dheader-font-size text-truncate"
+            (click)="openDiagram(primaryStorage, diagram)" [ngClass]="{'text-white': diagram.open}"
+            [title]="diagram.name" style="max-width: 120px">
+            <span>{{ diagram.name }}</span>
+          </button>
+          <div class="p-1 d-inline-flex justify-content-center align-items-center">
+            <button type="button"
+              class="d-flex bg-transparent justify-content-center m-0 align-items-center btn p-0 rounded-circle btn-close outline-none box-shadow-none float-left dheader-font-size"
+              [ngClass]="{'text-white close-active': diagram.open, 'close-inactive': !diagram.open}"
+              (click)="closeFromPrimaryDiagrams(diagram, $event)">
+              <fa name="close" class="h-100 w-100"></fa>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-inline-flex float-left" style="max-width: 50px;">
+        <button type="button" (click)="showLoadForPrimaryStorage()"
+          class="btn bg-transparent border-0 text-muted rounded-0 outline-none box-shadow-none">
+          <b>+</b>
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="additionalStorage.diagrams !== null && additionalStorage.diagrams !== undefined && additionalStorage.diagrams.length !== 0"
+      class="position-relative overflow-hidden float-left m-0 diagrams-container h-100 border-secondary border-left"
+      [style.width.%]="additionalStorage.width">
+      <div style="max-width: calc(100% - 50px);" class="h-100 float-left header-container p-1" cdkDropList
+        id="additional-list" [cdkDropListData]="additionalStorage.diagrams" [cdkDropListConnectedTo]="['primary-list']"
+        (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal">
+        <div class="d-inline-flex float-left justify-content-center align-items-center diagram-header mr-1"
+          *ngFor="let diagram of additionalStorage.diagrams"
+          [ngClass]="{'bg-active': diagram.open, 'bg-inactive': !diagram.open}" style="max-height: 40px" cdkDrag
+          cdkDragLockAxis="x">
+          <button type="button"
+            class="btn bg-transparent outline-none box-shadow-none float-left dheader-font-size text-truncate"
+            (click)="openDiagram(additionalStorage, diagram)" [ngClass]="{'text-white': diagram.open}"
+            [title]="diagram.name" style="max-width: 120px">
+            <span>{{ diagram.name }}</span>
+          </button>
+          <div class="p-1 d-inline-flex justify-content-center align-items-center">
+            <button type="button"
+              class="d-flex bg-transparent justify-content-center m-0 align-items-center btn p-0 rounded-circle btn-close outline-none box-shadow-none float-left dheader-font-size"
+              [ngClass]="{'text-white close-active': diagram.open, 'close-inactive': !diagram.open}"
+              (click)="closeFromAdditionalDiagrams(diagram, $event)">
+              <fa name="close" class="h-100 w-100"></fa>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-inline-flex float-left" style="max-width: 50px;">
+        <button type="button" (click)="showLoadForAdditionalStorage()"
+          class="btn bg-transparent border-0 text-muted rounded-0 outline-none box-shadow-none">
+          <b>+</b>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-load-storage *ngIf="loadForPrimaryStorage" (close)="closeLoadForPrimarySotrage()"
+  (select)="doLoadForPrimaryStorage($event)"></app-load-storage>
+<app-load-storage *ngIf="loadForAdditionalStorage" (close)="closeLoadForAdditionalSotrage()"
+  (select)="doLoadForAdditionalStorage($event)"></app-load-storage>

@@ -1,0 +1,46 @@
+@import "../../style-util/main_font";
+@import "../../style-util/mixin_transition";
+
+$bg-color: #d9d9d9;
+$bg-background: #f5f5f5;
+$bg-active-color: rgba(0, 123, 255, 0.3);
+
+header {
+  height: 60px;
+  box-shadow: 0 0 2px black;
+}
+
+main {
+  height: calc(100% - 60px);
+  overflow: auto;
+  font-size: 15px;
+}
+
+footer {
+  height: 60px;
+}
+
+mat-checkbox {
+  padding-top: 5px;
+}
+
+.bg-active {
+  background-color: $bg-active-color;
+}
+
+.div-border{
+  border-left: 3px solid #004bc4;
+  border-radius: 5px;
+}
+
+.btn-copy{
+  right: 30px;
+  top: 70px;
+}
+
+.create-table-tip {
+  max-width: 500px;
+  bottom: 8px;
+  min-height: 50px;
+  font-size: 15px;
+}

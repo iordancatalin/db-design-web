@@ -1,0 +1,1 @@
+import {AbstractComponent} from '../abstract-component';export abstract class AbstractUniqueConstraint extends AbstractComponent {  public constructor(id: string) {    super(id);  }}

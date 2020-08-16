@@ -1,0 +1,38 @@
+<div class="position-absolute notifications-position notifications">
+  <div class="notifications-container">
+    <header class="p-2 row m-0 w-100">
+      <div class="d-flex justify-content-center align-items-center w-100">
+        <div class="col col-10 text-white">
+          Notifications
+        </div>
+        <div class="col col-2 d-inline-flex justify-content-end align-items-center">
+          <button (click)="onClose()" class="text-white border-0 bg-transparent outline-none cursor-pointer">
+            <fa name="sort-down"></fa>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="bg-white p-1">
+
+      <div *ngFor="let wrapper of notifications"
+        class="p-2 row m-0 d-flex justify-content-center align-content-center mt-1 border-bottom">
+        <button (click)="openNotification(wrapper)"
+          class="text-left p-0 col cursor-pointer bg-transparent col-11 border-0 outline-none text-truncate"
+          [title]="wrapper.notification.sender + ' shared ' + wrapper.notification.diagramName + ' with you'">
+          {{wrapper.notification.sender}} shared {{wrapper.notification.diagramName}} with you
+        </button>
+        <div class="col col-1 p-0 d-inline-flex justify-content-end align-items-center">
+          <button (click)="closeNotification(wrapper)" type="button"
+            class="btn bg-transparent outline-none box-shadow-none btn-option">
+            <fa name="times"></fa>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="!notifications.length" class="h-100 d-flex justify-content-center align-items-center text-muted">
+        <h2>Inbox is empty :)</h2>
+      </div>
+
+    </main>
+  </div>
+</div>

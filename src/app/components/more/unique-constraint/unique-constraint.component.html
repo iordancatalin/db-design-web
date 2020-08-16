@@ -1,0 +1,26 @@
+<div class="col col-5 float-left d-inline-flex justify-content-center align-items-center">
+  <input type="text"
+         [(ngModel)]="uniqueConstraint.name"
+         [name]="uniqueConstraint.id + '_name'"
+         [id]="uniqueConstraint.id + '_name'"
+         (focus)="focus($event)"
+         placeholder="name (optional)"
+         class="form-control rounded-0 pl-1 w-100 box-shadow-none constraint-input">
+</div>
+<div class="col col-6 float-left">
+  <input type="text"
+         [(ngModel)]="uniqueConstraint.textColumns"
+         [name]="uniqueConstraint.id + '_columns'"
+         [id]="uniqueConstraint.id + '_columns'"
+         (focus)="focus($event)"
+         placeholder="Ex: id, name,..."
+         class="form-control rounded-0 pl-1 w-100 box-shadow-none constraint-input border-left-0">
+</div>
+<div class="col col-1 float-left d-inline-flex justify-content-center align-items-center p-0">
+  <button type="button"
+          (click)="delete($event)"
+          tabindex="1"
+          class="rounded border border-danger bg-danger text-light outline-none cursor-pointer">
+    <fa name="times"></fa>
+  </button>
+</div>

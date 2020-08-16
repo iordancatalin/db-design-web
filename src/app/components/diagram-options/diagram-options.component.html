@@ -1,0 +1,41 @@
+<div *ngIf="options.enable" class="position-absolute table-options-panel rounded overflow-hidden"
+  #optionsContainerElementRef [style.left.px]="options.position.left" [style.top.px]="options.position.top"
+  [style.zIndex]="options.zIndex" [ngClass]="{'invisible': !options.calibrate}">
+  <div class="p-0">
+    <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4" (click)="rename()">
+      <fa name="edit"></fa>
+      <span class="ml-3">Rename</span>
+    </button>
+    <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mb-1"
+      (click)="clearAll($event)">
+      <fa name="trash"></fa>
+      <span class="ml-3">Clear all</span>
+    </button>
+    <div class="border-bottom border-div"></div>
+    <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1"
+      (click)="duplicate($event)">
+      <fa name="clone"></fa>
+      <span class="ml-3">Duplicate</span>
+    </button>
+    <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4" (click)="paste($event)"
+      [disabled]="!clipboardService.isTemporaryTable()">
+      <fa name="copy"></fa>
+      <span class="ml-3">Paste</span>
+    </button>
+    <div class="border-bottom border-div"></div>
+    <button type="button" (click)="share()" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1">
+      <fa name="user-plus"></fa>
+      <span class="ml-3">Share</span>
+    </button>
+    <button type="button" (click)="generateLink()" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4">
+      <fa name="link"></fa>
+      <span class="ml-3">Generate Link</span>
+    </button>
+    <div class="border-bottom border-div"></div>
+    <button type="button" (click)="generateSQL()" [disabled]="disableGenerateSQL"
+      class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1">
+      <fa name="cloud-download"></fa>
+      <span class="ml-3">Generate SQL</span>
+    </button>
+  </div>
+</div>

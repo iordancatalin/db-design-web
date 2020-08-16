@@ -1,0 +1,1 @@
+export class ValidationUtil {  public static isNullOrUndefined(object: any): boolean {    return object === null || typeof object === 'undefined';  }  public static isArrayEmpty(array: Array<any>): boolean {    return ValidationUtil.isNullOrUndefined(array) || array.length === 0;  }}

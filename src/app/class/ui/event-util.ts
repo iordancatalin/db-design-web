@@ -1,0 +1,1 @@
+export class EventUtil {  public static stopEvent(event: Event) {    event.stopImmediatePropagation();  }}

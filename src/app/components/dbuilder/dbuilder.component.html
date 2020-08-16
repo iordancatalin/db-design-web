@@ -1,0 +1,106 @@
+<div class="container-fluid h-100 p-0 position-relative" #builder>
+
+  <app-diagram-tools #diagramTools *ngIf="primaryStorage.existsOpenDiagram() && !toGenerateDiagram"
+    (onFullScreenClick)="fullScreen($event)" (onLocateClick)="location($event)" (onReshapeClick)="reshape($event)"
+    (onCursorClick)="cursor($event)" (onTableClick)="createTable($event)"
+    (onSplitVerticalClick)="onSplitVertical($event)" (onSplitHorizontalClick)="onSplitHorizontal($event)"
+    (onSqlClick)="createSql($event)"></app-diagram-tools>
+
+  <div *ngIf="!toGenerateDiagram" class="float-left position-relative diagrams-container">
+    <app-dheader [primaryStorage]="primaryStorage" [additionalStorage]="additionalStorage"
+      (onAdditionalDiagramClose)="closeFromAdditionalDiagrams($event)" (onToolsClick)="toggleTools($event)"
+      (onEmptyHolder)="emptyHolder($event)" (onNewDiagramAction)="newDiagramAction($event)"></app-dheader>
+  </div>
+
+  <app-dbuilder-default *ngIf="!primaryStorage.existsOpenDiagram() && !toGenerateDiagram"
+    (onSelectDiagram)="selectDiagram($event)">
+  </app-dbuilder-default>
+
+  <div class="float-left  position-relative workspace-container" #diagramsContainer
+    *ngIf="primaryStorage.existsOpenDiagram() && !toGenerateDiagram">
+
+    <div class=" position-relative split-container" *ngIf="dBuilderSplit.activeVertical" id="vSplitContainer">
+
+      <div class="h-100 d-inline-block float-left position-relative overflow-hidden"
+        [style.width.%]="dBuilderSplit.firstSide">
+        <app-diagram #primaryDiagram [diagram]="primaryStorage.openDiagram" (atDuplicate)="onDuplicateDiagram($event)"
+          (atRelationRequest)="onRelationRequest($event)" (worksheetClick)="worksheetClick($event)"
+          (atMoreOption)="moreOption($event)" (atGenerateSQL)="doGenerateSQL($event)"></app-diagram>
+      </div>
+
+      <div class="h-100 bg-dark float-left horizontal-separator position-absolute outline-none"
+        #verticalSeparator="cdkDrag" (cdkDragMoved)="resizeVertical($event)"
+        (keydown)="verticalSeparatorKeydown($event)" cdkDrag cdkDragLockAxis="x"
+        (cdkDragEnded)="finishResizeVertical($event)" [style.left.%]="dBuilderSplit.position"
+        cdkDragBoundary="#vSplitContainer" tabindex="1" id="verticalSeparator">
+        <div class="p-2 bg-dark position-absolute d-flex justify-content-center align-items-center horizontal-icon">
+          <img src="../../../assets/icons/more.svg" style="width: 15px; height: 15px;"
+            onmousedown="document.getElementById('verticalSeparator').focus()">
+        </div>
+      </div>
+
+      <div class=" h-100 d-inline-block float-left position-relative overflow-hidden"
+        [style.width.%]="dBuilderSplit.secondSide">
+        <app-diagram *ngIf="!pickStorage.pickActive && additionalStorage.openDiagram"
+          [diagram]="additionalStorage.openDiagram" #additionalDiagram (atDuplicate)="onDuplicateDiagram($event)"
+          (atRelationRequest)="onRelationRequest($event)" (worksheetClick)="worksheetClick($event)"
+          (atMoreOption)="moreOption($event)" (atGenerateSQL)="doGenerateSQL($event)"></app-diagram>
+        <app-pick-diagram *ngIf="pickStorage.pickActive" [width]="dBuilderSplit.secondSide"
+          [pickDiagrams]="pickStorage.pickOptions" (onPick)="pickDiagram($event)"></app-pick-diagram>
+      </div>
+    </div>
+
+    <div class="split-container position-relative" *ngIf="dBuilderSplit.activeHorizontal">
+      <div class="d-inline-block float-left position-relative overflow-hidden w-100"
+        [style.height.%]="dBuilderSplit.firstSide">
+        <app-diagram #primaryDiagram [diagram]="primaryStorage.openDiagram" (atDuplicate)="onDuplicateDiagram($event)"
+          (atRelationRequest)="onRelationRequest($event)" (worksheetClick)="worksheetClick($event)"
+          (atMoreOption)="moreOption($event)" (atGenerateSQL)="doGenerateSQL($event)"></app-diagram>
+      </div>
+
+      <div class="w-100 bg-dark float-left vertical-separator position-absolute outline-none"
+        #horizontalSeparator="cdkDrag" (cdkDragMoved)="resizeHorizontal($event)"
+        (keydown)="horizontalSeparatorKeydown($event)" cdkDragBoundary=".split-container" cdkDrag cdkDragLockAxis="y"
+        tabindex="1" id="horizontalSeparator" (cdkDragEnded)="finishResizeHorizontal($event)"
+        [style.top.%]="dBuilderSplit.position">
+        <div class="p-2 bg-dark position-absolute d-flex justify-content-center align-items-center vertical-icon">
+          <img src="../../../assets/icons/more.svg" style="width: 15px; height: 15px;"
+            onmousedown="document.getElementById('horizontalSeparator').focus()">
+        </div>
+      </div>
+
+      <div class="d-inline-block float-left position-relative overflow-hidden w-100"
+        [style.height.%]="dBuilderSplit.secondSide">
+        <app-diagram #additionalDiagram *ngIf="!pickStorage.pickActive && additionalStorage.openDiagram"
+          [diagram]="additionalStorage.openDiagram" (atDuplicate)="onDuplicateDiagram($event)"
+          (atRelationRequest)="onRelationRequest($event)" (worksheetClick)="worksheetClick($event)"
+          (atMoreOption)="moreOption($event)" (atGenerateSQL)="doGenerateSQL($event)"></app-diagram>
+        <app-pick-diagram *ngIf="pickStorage.pickActive" [pickDiagrams]="pickStorage.pickOptions"
+          (onPick)="pickDiagram($event)" [isVertical]="true"></app-pick-diagram>
+      </div>
+    </div>
+
+    <div class="h-100 w-100" *ngIf="!dBuilderSplit.activeVertical && !dBuilderSplit.activeHorizontal">
+      <div class="d-block float-left position-relative overflow-hidden h-100 w-100">
+        <app-diagram #primaryDiagram [diagram]="primaryStorage.openDiagram" (atDuplicate)="onDuplicateDiagram($event)"
+          (atRelationRequest)="onRelationRequest($event)" (worksheetClick)="worksheetClick($event)"
+          (atMoreOption)="moreOption($event)" (atGenerateSQL)="doGenerateSQL($event)"></app-diagram>
+      </div>
+    </div>
+  </div>
+
+  <app-generate-sql *ngIf="toGenerateDiagram" (onCancel)="cancelGenerate()" [diagram]="toGenerateDiagram">
+  </app-generate-sql>
+
+  <div *ngIf="createTableTip"
+    class="row m-0 p-2 text-light position-fixed fixed-bottom bg-dark m-auto rounded create-table-tip">
+    <div class="col col-9 d-inline-flex justify-content-center  align-items-center">
+      <span>Press on the worksheet to create a table.</span>
+    </div>
+    <div class="col col-3 d-inline-flex justify-content-center  align-items-center border-left border-white">
+      <button type="button" class="btn bg-transparent text-white box-shadow-none" (click)="abortCreateTable($event)">
+        Abort
+      </button>
+    </div>
+  </div>
+</div>

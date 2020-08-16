@@ -1,0 +1,1 @@
+export enum DataTypeEnum {  CHAR = 'char',  VARCHAR2 = 'varchar2',  VARCHAR = 'varchar',  NCHAR = 'nchar',  NVARCHAR2 = 'nvarchar2',  NVARCHAR = 'nvarchar',  NUMBER = 'number',  DATE = 'date',  CLOB = 'clob',  NCLOB = 'nclob',  BLOB = 'blob'}

@@ -1,0 +1,55 @@
+@import "../../style-util/main_font";
+@import "../../style-util/mixin_transition";
+
+$bg-color:#d9d9d9;
+$bg-active-color: rgba(67, 125, 219, 0.3);
+
+.search-input {
+  max-width: 500px;
+  background-color: $bg-color;
+  border-top: {
+    right-radius: 20px;
+    left-radius: 0;
+  }
+  border-bottom: {
+    right-radius: 20px;
+    left-radius: 0;
+  }
+}
+
+.search-image {
+  width: 17px;
+  height: 100%;
+}
+
+.option-image{
+    width: 15px;
+    max-height: 13px; 
+}
+
+.btn-option{
+    padding: .65rem !important;
+    @include _transition(background-color, .3s, linear);
+}
+
+.btn-option:hover{
+    background-color: $bg-color !important;
+}
+
+.btn-option:active{
+    background-color: $bg-active-color !important;
+}
+
+.search-button {
+    background-color: $bg-color;
+
+    border-top: {
+        left-radius: 20px;
+        right-radius: 0;
+    }
+
+    border-bottom: {
+        left-radius: 20px;
+        right-radius: 0;        
+    }
+}

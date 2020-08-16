@@ -1,0 +1,14 @@
+.options-panel {
+  z-index: 10;
+  top: 20%;
+  left: 20%;
+  font-size: 14px;
+  min-width: 180px;
+  box-shadow: 0 0 4px black;
+}
+
+.border-div {
+  margin: auto;
+  width: 95%;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}

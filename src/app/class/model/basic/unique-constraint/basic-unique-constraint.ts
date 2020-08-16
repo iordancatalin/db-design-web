@@ -1,0 +1,1 @@
+export class BasicUniqueConstraint {  public constructor(public name: string, public columns: Array<string>) {  }}

@@ -1,0 +1,12 @@
+@import "../../style-util/main_font";
+@import "../../style-util/mixin_transition";
+@import "../../style-util/popup-style.scss";
+
+.generate-input {
+  min-width: 280px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+footer {
+  border-top: 1px solid #e4ebf1;
+}

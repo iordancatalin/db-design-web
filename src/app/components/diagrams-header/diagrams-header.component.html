@@ -1,0 +1,23 @@
+<header class="p-2 w-100 row m-0 border-bottom" style="border-color: rgba(0, 0, 0, 0.5)">
+  <div class="col col-9 d-inline-flex justify-content-center align-items-center">
+    <button type="button" class="btn search-button float-left border-0 outline-none box-shadow-none">
+      <img src="../../../assets/icons/storage/search.svg" class="search-image" />
+    </button>
+    <input type="text" [formControl]="searchControl" (keyup)="keyup($event)" placeholder="Looking for somthing?"
+      class="border-0 form-control search-input float-left outline-none box-shadow-none" />
+  </div>
+  <div class="col col-3 d-inline-flex justify-content-end align-items-end">
+    <button (click)="gridClick($event)"
+      class="btn bg-transparent mr-1 rounded-circle d-flex justify-content-center align-items-center btn-option outline-none box-shadow-none">
+      <img src="../../../assets/icons/storage/menu.svg" class="option-image" />
+    </button>
+    <button (click)="listClick($event)"
+      class="btn bg-transparent mr-1 rounded-circle d-flex justify-content-center align-items-center btn-option outline-none box-shadow-none">
+      <img src="../../../assets/icons/storage/view-list.svg" class="option-image" />
+    </button>
+    <button *ngIf="showNewDiagram" (click)="newDiagram()"
+      class="btn bg-transparent mr-1 rounded-circle d-flex justify-content-center align-items-center btn-option outline-none box-shadow-none">
+      <img src="../../../assets/icons/storage/add-new-document.svg" class="option-image" />
+    </button>
+  </div>
+</header>

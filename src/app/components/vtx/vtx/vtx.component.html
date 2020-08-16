@@ -1,0 +1,19 @@
+<div class="container-fluid m-0 h-100 p-0 frame-container position-relative">
+  <div class="position-absolute w-100 h-100" style="left: 0; top: 0; background-color: rgba(0, 0, 0, 0.7)">
+    <div class="app-header">
+      <app-header></app-header>
+    </div>
+    <div class="p-2 app-frame">
+      <ng-template #framePlaceholder></ng-template>
+    </div>
+    <div class="app-footer d-flex justify-content-center align-items-center">
+      <footer class="d-flex justify-content-center align-items-center p-3">
+        <div class="d-inline-block m-1" *ngFor="let frame of frames">
+          <button type="button" class="btn-nav border-white border"
+                  [ngClass]="{'bg-white': frame.focus, 'bg-transparent': !frame.focus}"
+                  (click)="doNavOptionClick(frame)"></button>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>

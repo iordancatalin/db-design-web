@@ -1,0 +1,65 @@
+<div
+  class="w-100 h-100 p-3 d-flex justify-content-center align-items-center pick-container"
+>
+  <div class="w-100 h-100">
+    <div
+      class="d-flex justify-content-center align-items-center m-1"
+      [ngClass]="{ 'flex-row': width > 30, 'flex-column': width < 30 }"
+    >
+      <button
+        class="btn row rounded-0 p-0 border-0 m-1 pick-button"
+        (click)="createDiagram()"
+      >
+        <div
+          class="col col-3 bg-button text-white p-2 float-left border-right border-white"
+        >
+          <img
+            src="../../../assets/icons/new-document (1).svg"
+            class="pick-icon"
+          />
+        </div>
+        <div class="col col-9 float-left bg-button p-2 text-white">
+          <span>Create diagram</span>
+        </div>
+      </button>
+
+      <button
+        (click)="loadFromStorage()"
+        class="btn row rounded-0 p-0 border-0 m-1 pick-button"
+      >
+        <div
+          class="col col-3 bg-button text-white p-2 float-left border-right border-white"
+        >
+          <img src="../../../assets/icons/database.svg" class="pick-icon" />
+        </div>
+        <div class="col col-9 float-left bg-button p-2 text-white">
+          <span>Load from storage</span>
+        </div>
+      </button>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
+      <button
+        class="btn option-container row p-0 border-0 m-1 overflow-hidden"
+        *ngFor="let diagram of pickDiagrams"
+        (click)="diagramPicked(diagram)"
+      >
+        <div class="w-100 h-75 p-3 border-bottom border-secondary">
+          <img
+            src="../../../assets/icons/storage/database.svg"
+            class="w-100 h-100"
+          />
+        </div>
+        <div class="w-100 h-25 text-secondary p-1 label">
+          <p>{{ diagram.name }}</p>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-load-storage
+  *ngIf="showPopup"
+  (close)="closePopup()"
+  (select)="selectedDiagram($event)"
+></app-load-storage>

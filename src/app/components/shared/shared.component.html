@@ -1,0 +1,13 @@
+<section class="container-fluid h-100 p-2">
+  <app-diagrams-header
+    [showNewDiagram]="false"
+    (onGridClick)="gridClick($event)"
+    (onListClick)="listClick($event)"
+    (onSearch)="search($event)"
+  >
+  </app-diagrams-header>
+  <app-diagrams-body
+    [showListMode]="_showListView"
+    [diagrams]="_diagrams"
+  ></app-diagrams-body>
+</section>

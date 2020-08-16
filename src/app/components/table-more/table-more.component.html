@@ -1,0 +1,130 @@
+<div class="position-absolute more-container rounded overflow-auto"
+     [style.left.px]="table.position.left"
+     [style.top.px]="table.position.top"
+     cdkDrag>
+  <div class="position-sticky row p-1 m-0 text-light cursor-move header-more" cdkDragHandle>
+    <div class="col-9 col float-left d-inline-flex justify-content-start align-items-center">
+      <span>Table Properties</span>
+    </div>
+    <div class="col-3 col float-left d-inline-flex justify-content-end align-items-center">
+      <button type="button"
+              (click)="closePopup()"
+              class="btn bg-transparent text-light outline-none box-shadow-none">
+        <fa name="close"></fa>
+      </button>
+    </div>
+  </div>
+
+  <div class="w-100 p-2"
+       (mousedown)="stopEvent($event)"
+       style="font-size: 13px; max-height: 400px;">
+    <div class="p-1">
+      <div class="row mb-0 ml-0 mr-0 mt-1">
+        <div class="col col-4 float-left d-inline-flex justify-content-start align-items-center">
+          <span>Table name: </span>
+        </div>
+        <div class="col col-8 float-left d-inline-flex justify-content-center align-items-center">
+          <input type="text"
+                 placeholder="name"
+                 class="form-control rounded-0 pl-1 w-75 box-shadow-none"
+                 [(ngModel)]="table.name"
+                 name="tableName">
+        </div>
+      </div>
+      <div class="row mb-0 ml-0 mr-0 mt-1">
+        <div class="col col-4 float-left d-inline-flex justify-content-start align-items-center">
+          <span>Comment: </span>
+        </div>
+        <div class="col col-8 float-left d-inline-flex justify-content-center align-items-center">
+          <textarea class="form-control rounded-0 pl-1 w-75 box-shadow-none"
+                    [(ngModel)]="table.comment"
+                    name="tableComment"
+                    style="max-height: 47px; font-size: 13px;"></textarea>
+        </div>
+      </div>
+      <div class="row mb-0 ml-0 mr-0 mt-1">
+        <div class="col col-4 float-left d-inline-flex justify-content-start align-items-center">
+          <span>Primary key name: </span>
+        </div>
+        <div class="col col-8 float-left d-inline-flex justify-content-center align-items-center">
+          <input type="text"
+                 placeholder="(optional)"
+                 class="form-control rounded-0 pl-1 w-75 box-shadow-none"
+                 [(ngModel)]="table.tableConstraint.primaryKeyConstraint.name"
+                 name="primaryKeyName">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="border-bottom border-secondary row m-0 pb-1 pt-1 mt-1">
+      <div class="col col-8 float-left p-0 d-inline-flex justify-content-start align-items-center">
+        <span>Columns</span>
+      </div>
+      <div class="col col-4 float-left p-0 d-inline-flex justify-content-end align-items-center">
+        <button type="button"
+                class="bg-transparent text-secondary border-0 btn-view"
+                (click)="toggleColumns()">
+          <fa name="plus" *ngIf="!viewColumns"></fa>
+          <fa name="minus" *ngIf="viewColumns"></fa>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="viewColumns">
+      <div *ngFor="let column of table.htmlColumns">
+        <app-column [column]="column"
+                    [hasTableForeignKeyColumn]="table.hasForeignKeyColumn()"
+                    (atDelete)="deleteColumn($event)"
+                    (atFocus)="focusColumn($event)"
+                    (atDataExpend)="onDataExpend($event)"></app-column>
+      </div>
+    </div>
+
+    <div class="border-bottom border-secondary row m-0 pb-1 pt-1 mt-1">
+      <div class="col col-8 float-left p-0 d-inline-flex justify-content-start align-items-center">
+        <span>Check Constraints</span>
+      </div>
+      <div class="col col-4 float-left p-0 d-inline-flex justify-content-end align-items-center">
+        <button type="button"
+                class="bg-transparent text-secondary border-0 btn-view"
+                (click)="toggleCheckConstraints()">
+          <fa name="minus" *ngIf="viewCheckConstraints"></fa>
+          <fa name="plus" *ngIf="!viewCheckConstraints"></fa>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="viewCheckConstraints">
+      <div class="p-1 row m-0" *ngFor="let checkConstraint of table.tableConstraint.checkConstraints">
+        <app-check-constraint class="w-100"
+                              [checkConstraint]="checkConstraint"
+                              (atDelete)="deleteCheckConstraint($event)"
+                              (atFocus)="focusCheckConstraint($event)"></app-check-constraint>
+      </div>
+    </div>
+
+    <div class="border-bottom border-secondary row m-0 pb-1 pt-1 mt-1">
+      <div class="col col-8 float-left p-0 d-inline-flex justify-content-start align-items-center">
+        <span>Unique Constraints</span>
+      </div>
+      <div class="col col-4 float-left p-0 d-inline-flex justify-content-end align-items-center">
+        <button type="button"
+                class="bg-transparent text-secondary border-0 btn-view"
+                (click)="toggleUniqueConstraints()">
+          <fa name="minus" *ngIf="viewUniqueConstraints"></fa>
+          <fa name="plus" *ngIf="!viewUniqueConstraints"></fa>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="viewUniqueConstraints">
+      <div class="p-1 row m-0" *ngFor="let uniqueConstraint of table.tableConstraint.uniqueConstraints">
+        <app-unique-constraint class="w-100"
+                               [uniqueConstraint]="uniqueConstraint"
+                               (atDelete)="deleteUniqueConstraint($event)"
+                               (atFocus)="focusUniqueConstraint($event)"></app-unique-constraint>
+      </div>
+    </div>
+  </div>
+</div>

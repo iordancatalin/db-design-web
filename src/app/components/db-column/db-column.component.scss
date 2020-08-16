@@ -1,0 +1,27 @@
+@import "../../style-util/main_font";
+@import "../../style-util/mixin_transition";
+
+.db-column {
+  outline: none;
+  padding: .25rem !important;
+}
+
+.db-column:focus .btn-option, .db-column:hover .btn-option {
+  display: block !important;
+}
+
+.text-purple {
+  color: #ef15c7 !important;
+}
+
+.table-input {
+  max-width: 100px !important;
+}
+
+.highlight-column {
+  background-color: #3ea8de !important;
+}
+
+input:disabled {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}

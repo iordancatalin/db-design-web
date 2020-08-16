@@ -1,0 +1,60 @@
+<section class="container-fluid overflow-auto p-2 position-relative" (click)="closeStorageOptions()"
+  style="height: calc(100% - 3rem)">
+  <div tabindex="1" *ngFor="let diagram of diagrams"
+    class="diagram-container rounded d-inline-block m-2 outline-none cursor-pointer p-2"
+    [ngClass]="{ 'grid-mode': !showListMode, 'list-mode': showListMode }" style="background-color: #d9d9d9">
+    <div class="h-100 position-relative">
+      <div class="h-100 w-100 bg-transparent position-relative border-0 outline-none cursor-pointer"
+        *ngIf="!showListMode">
+        <div class="position-absolute date-banner p-2 bg-dark text-white">
+          <span>{{diagram.creationDate | date: 'MMM dd yyyy hh:mm'}}</span>
+        </div>
+        <div routerLink="/master/workshop" [queryParams]="{ uid: diagram.id }"
+          (contextmenu)="rightClick($event, diagram)"
+          class="h-100 w-100 p-0 border-0 bg-transparent cursor-pointer outline-none">
+          <div style="height: calc(100% - 40px)" class="d-flex justify-content-center align-items-center">
+            <img src="../../../assets/icons/storage/database.svg" style="height: 60px; width: 60px;">
+          </div>
+          <div style="height: 40px; font-size: 17px; border-color: rgba(0, 0, 0, 0.2) !important"
+            class="bottom-container border-top d-flex justify-content-center align-items-center">
+            <span>{{diagram.name}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="h-100" *ngIf="showListMode">
+        <div routerLink="/master/workshop" class="outline-none" [queryParams]="{ uid: diagram.id }"
+          (contextmenu)="rightClick($event, diagram)">
+          <div style="width: 40px;" class="float-left d-flex justify-content-center align-items-center">
+            <img src="../../../assets/icons/storage/database.svg" style="height: 30px; width: 30px;">
+          </div>
+
+          <div style="width:calc(100% - 40px); font-size: 17px;"
+            class="float-left bottom-container d-flex justify-content-center align-items-center h-100">
+            <span>{{diagram.name}}</span>
+          </div>
+        </div>
+      </div>
+      <app-storage-options *ngIf="diagram.showStorageOptions" [diagram]="diagram" (rename)="diagramRename($event)"
+        (open)="openDiagram($event)" (share)="diagramShare($event)" (generateLink)="diagramGenerateLink($event)"
+        (delete)="diagramDelete($event)"></app-storage-options>
+    </div>
+  </div>
+</section>
+
+<app-rename-diagram *ngIf="toRenameDiagram" [diagram]="toRenameDiagram" (close)="closeRenamePopup()">
+</app-rename-diagram>
+<app-share-diagram *ngIf="toShareDiagram" [diagram]="toShareDiagram" (close)="closeSharePopup()">
+</app-share-diagram>
+<app-generate-link *ngIf="uid" [uid]="uid" (close)="closeGenerateLink()" (copy)="copyGenerateLink()">
+</app-generate-link>
+
+<div *ngIf="showTip" class="row m-0 p-2 text-light position-fixed fixed-bottom bg-dark m-auto rounded tip">
+  <div class="col col-9 d-inline-flex justify-content-center  align-items-center">
+    <span>Generated link has been copy to clipboard.</span>
+  </div>
+  <div class="col col-3 d-inline-flex justify-content-center  align-items-center border-left border-white">
+    <button type="button" class="btn bg-transparent text-white box-shadow-none" (click)="closeTip()">
+      Close
+    </button>
+  </div>
+</div>

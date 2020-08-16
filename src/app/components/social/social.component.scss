@@ -1,0 +1,15 @@
+@import "../../style-util/mixin_transition";
+
+.icon-container {
+  width: 45px;
+  height: 45px;
+  border: 1px solid white;
+  position: relative;
+  overflow: hidden;
+  @include double_transition(background-color, color, .4s, ease-out);
+}
+
+.icon-container:hover {
+  background-color: white !important;
+  color: #343a40 !important;
+}

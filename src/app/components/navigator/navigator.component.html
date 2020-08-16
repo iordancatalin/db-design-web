@@ -1,0 +1,106 @@
+<div
+  class="nav-container float-left h-100 position-relative overflow-visible"
+  [ngClass]="{ 'extend-nav': showMenu, 'compress-nav': !showMenu }"
+>
+  <div class="p-2 d-flex justify-content-start align-items-center w-100">
+    <button
+      type="button"
+      (click)="toggleShowMenu()"
+      class="cursor-pointer box-shadow-none btn border-0 bg-transparent outline-none text-white"
+    >
+      <fa name="bars"></fa>
+    </button>
+  </div>
+  <div class="mt-2">
+    <a
+      *ngFor="let option of _navOptions"
+      [routerLink]="option._routerLink"
+      class="row mr-0 ml-0 mt-2 pt-2 pb-2 d-block w-100 nav-button text-secondary"
+      [ngClass]="{ 'nav-active': option._active }"
+    >
+      <div
+        class="col d-inline-flex float-left align-items-center"
+        [ngClass]="{ 'col-3': showMenu, 'col-12': !showMenu }"
+      >
+        <img
+          [src]="'../../../assets/icons/nav-icons/' + option._icon"
+          class="nav-image"
+        />
+      </div>
+      <div
+        class="col col-9 d-inline-flex float-left option-label justify-content-start align-items-center text-truncate"
+        *ngIf="showMenu && extendedMenu"
+      >
+        <span>{{ option._name }}</span>
+      </div>
+    </a>
+  </div>
+  <div class="position-absolute p-1 bottom-options">
+    <div
+      class="d-flex justify-content-center align-intems-center mb-1 position-relative"
+    >
+      <button
+        (click)="viewNotifications()"
+        title="Notifications"
+        class="btn bg-transparent p-0 outline-none box-shadow-none position-relative"
+      >
+        <div
+          *ngIf="notifications.length"
+          class="position-absolute notification-alert pulse rounded-circle"
+        ></div>
+        <img
+          src="../../../assets/icons/nav-icons/notification.svg"
+          class="nav-image"
+        />
+      </button>
+      <app-notifications
+        *ngIf="showNotifications"
+        [notifications]="notifications"
+        (close)="closeNotifications()"
+      >
+      </app-notifications>
+    </div>
+    <div
+      class="d-flex justify-content-center align-intems-center mt-2 mb-2 position-relative"
+    >
+      <button
+        (click)="toggleImgOptions($event)"
+        class="btn bg-transparent rounded-circle border-white overflow-hidden p-0 btn-image"
+      >
+        <img
+          *ngIf="_authenticationService.getAuthenticatedAccount() && _authenticationService.getAuthenticatedAccount().photoURL"
+          [src]="_authenticationService.getAuthenticatedAccount().photoURL"
+          class="w-100 h-100"
+        />
+        <img
+        *ngIf="!_authenticationService.getAuthenticatedAccount() || !_authenticationService.getAuthenticatedAccount().photoURL"
+        src="../../../assets/images/user.png"
+          class="w-100 h-100"
+        />
+      </button>
+      <div
+        *ngIf="imgOptions"
+        class="position-absolute rounded overflow-hidden image-options-container"
+      >
+        <div class="border-bottom border-color">
+          <a
+            routerLink="/master/profile"
+            (click)="hideImgOptions()"
+            class="btn w-100 outline-none box-shadow-none bg-transparent nav-img-button rounded-0 text-dark"
+          >
+            <span>Profile</span>
+          </a>
+        </div>
+        <div>
+          <button
+            (click)="signOut($event)"
+            type="button"
+            class="btn w-100 outline-none box-shadow-none bg-transparent nav-img-button rounded-0 text-dark"
+          >
+            <span>Sing out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

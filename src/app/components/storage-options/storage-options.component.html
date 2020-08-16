@@ -1,0 +1,35 @@
+<div class="position-absolute options-panel pt-1 pb-1 bg-white rounded">
+  <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1"
+    (click)="onOpen($event)">
+    <fa name="eye"></fa>
+    <span class="ml-3">Open</span>
+  </button>
+  <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4" (click)="onRename($event)">
+    <fa name="edit"></fa>
+    <span class="ml-3">Rename</span>
+  </button>
+  <div class="border-bottom border-div">
+  </div>
+  <button type="button" (click)="onShare($event)"
+    class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1">
+    <fa name="user-plus"></fa>
+    <span class="ml-3">Share</span>
+  </button>
+  <button type="button" (click)="onGenerateLink($event)"
+    class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4">
+    <fa name="link"></fa>
+    <span class="ml-3">Generate Link</span>
+  </button>
+  <div class="border-bottom border-div">
+  </div>
+  <button type="button" (click)="onDelete($event)"
+    class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1">
+    <fa name="trash"></fa>
+    <span class="ml-3">Delete</span>
+  </button>
+  <button type="button" (click)="onMore($event)"
+    class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1">
+    <fa name="ellipsis-h"></fa>
+    <span class="ml-3">More</span>
+  </button>
+</div>

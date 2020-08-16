@@ -1,0 +1,123 @@
+<div class="position-absolute db-table" tabindex="1" cdkDrag (cdkDragMoved)="dragTable($event)"
+  (cdkDragEnded)="updateLocation($event)" [id]="table.id" (click)="tableClicked($event)" (mousedown)="increaseZIndex()"
+  (keyup)="keyup($event)" (contextmenu)="rightClick($event);" (keydown)="keydown($event)"
+  [style.left.px]="table.position.left" [style.top.px]="table.position.top" [style.zIndex]="table.zIndex"
+  [style.width.px]="table.editableMode ? table.width + 200 : table.width"
+  [ngClass]="{'transition-position': table.positionTransition}">
+
+  <div class="position-absolute w-100 table-wrapper" [style.transform]="'scale(' + scaleFactor + ')'">
+
+    <div class="position-absolute" style="left: -20px; top: 55%;" *ngIf="!table.editableMode">
+      <button type="button" (click)="decreaseWidth($event)"
+        class="pr-5 font-weight-bold cursor-pointer d-inline-flex justify-content-center align-items-center resize-button text-secondary bg-transparent outline-none border-0">
+        <fa name="angle-double-left"></fa>
+      </button>
+    </div>
+
+    <div class="position-absolute" style="right: -20px; top: 55%;" *ngIf="!table.editableMode">
+      <button type="button" (click)="increaseWidth($event)"
+        class="pl-5 font-weight-bold cursor-pointer d-inline-flex justify-content-center align-items-center resize-button text-secondary bg-transparent outline-none border-0">
+        <fa name="angle-double-right"></fa>
+      </button>
+    </div>
+
+    <div class="p-2 db-header position-relative">
+
+      <div *ngIf="false && !table.enableOptions && !table.editableMode"
+        class="pl-2 pr-2 pt-1 pb-1 position-absolute bg-danger text-white rounded user-wrapper">
+        <span>Iordan Ionut Catalin</span>
+      </div>
+
+      <fa name="exclamation" class="text-danger" *ngIf="!table.editableMode && alreadyExists"></fa>
+      <span class="text-danger pl-1" *ngIf="!table.editableMode && alreadyExists"
+        title="A table with this name already exists">{{ table.name }}</span>
+      <span class="text-secondary pl-1" *ngIf="!table.editableMode && !alreadyExists">{{ table.name }}</span>
+      <input type="text" class="text-secondary p-1 w-50 border border-secondary" *ngIf="table.editableMode"
+        (keydown)="stopEvent($event)" (keyup)="keyupTableName($event)" (keypress)="stopEvent($event)"
+        (mousedown)="stopEvent($event)" [(ngModel)]="table.name">
+      <div class="float-right">
+        <button class="btn-option-table border-0 text-secondary d-none" (click)="toggleExtraOptionsHeader($event)">
+          <fa name="ellipsis-v"></fa>
+        </button>
+      </div>
+
+      <div class="position-absolute table-options-panel rounded overflow-hidden" [id]="table.id + '_options'"
+        *ngIf="table.enableOptions" [style.zIndex]="table.zIndex + 1" [style.left.px]="table.optionsPosition.left"
+        [style.top.px]="table.optionsPosition.top" [ngClass]="{'invisible': !table.calibrateOptions}">
+        <div class="p-0">
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4"
+            (click)="toggleEditMode($event)">
+            <fa name="edit"></fa>
+            <span class="ml-3">Edit</span>
+          </button>
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mb-1"
+            (click)="drop($event)">
+            <fa name="trash"></fa>
+            <span class="ml-3">Drop table</span>
+          </button>
+          <div class="border-bottom" style="margin: auto; width: 95%; border-color: rgba(0, 0, 0, 0.2) !important;">
+          </div>
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1"
+            (click)="duplicate($event)">
+            <fa name="clone"></fa>
+            <span class="ml-3">Duplicate</span>
+          </button>
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4"
+            (click)="copy($event)">
+            <fa name="copy"></fa>
+            <span class="ml-3">Copy</span>
+          </button>
+          <div class="border-bottom" style="margin: auto; width: 95%; border-color: rgba(0, 0, 0, 0.2) !important;">
+          </div>
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1" (click)="cut()">
+            <fa name="cut"></fa>
+            <span class="ml-3">Cut</span>
+          </button>
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4"
+            *ngIf="table.temporaryColumn === null" (click)="dropColumns($event)">
+            <fa name="trash"></fa>
+            <span class="ml-3">Drop columns</span>
+          </button>
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4"
+            *ngIf="table.temporaryColumn !== null" (click)="dropColumn($event)">
+            <fa name="trash"></fa>
+            <span class="ml-3">Drop column</span>
+          </button>
+          <div class="border-bottom" style="margin: auto; width: 95%; border-color: rgba(0, 0, 0, 0.2) !important;">
+          </div>
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4 mt-1"
+            [disabled]="!table.hasPkColumn() && table.temporaryColumn === null" (click)="addRelation($event)">
+            <fa name="plus-square"></fa>
+            <span class="ml-3">Add relation</span>
+          </button>
+          <button type="button" class="bg-transparent btn-extra-option d-flex border-0 w-100 pl-4"
+            (click)="moreOption($event)">
+            <fa name="ellipsis-h"></fa>
+            <span class="ml-3">More</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pl-1 pr-1 border-secondary db-body bg-white" [ngClass]="{'border-dashed': table.cutActive}">
+
+      <!-- pk columns container -->
+      <app-db-column [dangerColumn]="table.hasColumnTwice(column)" [column]="column"
+        *ngFor="let column of table.primaryKeyColumns" [editableMode]="table.editableMode"
+        (atExtraColumnFocus)="extraColumnFocus($event)" (atToggleOptions)="toggleOptions($event)"
+        (atPkChanged)="pkChanged($event)" (atRequestExitEditMode)="requestExitEditMode($event)"
+        (atDatatypeMore)="onDatatypeExpend($event)">
+      </app-db-column>
+      <div class="pk-last-column" *ngIf="requireSeparator()"></div>
+      <app-db-column [dangerColumn]="table.hasColumnTwice(column)" [column]="column"
+        *ngFor="let column of table.nonPrimaryKeyColumns" [editableMode]="table.editableMode"
+        (atExtraColumnFocus)="extraColumnFocus($event)" (atToggleOptions)="toggleOptions($event)"
+        (atPkChanged)="pkChanged($event)" (atRequestExitEditMode)="requestExitEditMode($event)"
+        (atDatatypeMore)="onDatatypeExpend($event)">
+      </app-db-column>
+    </div>
+  </div>
+</div>
+
+<app-table-more *ngIf="table.showMoreTable" [table]="table" (atClose)="atMoreClose()"
+  (atColumnDelete)="atColumnDelete($event)"></app-table-more>

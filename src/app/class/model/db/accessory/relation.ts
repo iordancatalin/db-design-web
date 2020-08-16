@@ -1,0 +1,1 @@
+export class Relation {  public constructor(public childColumnId: string, public parentColumnId: string) {  }}

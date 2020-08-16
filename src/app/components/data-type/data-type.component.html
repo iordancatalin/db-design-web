@@ -1,0 +1,62 @@
+<div class="position-absolute rounded overflow-hidden p-1 data-type-container"
+     *ngIf="isTableMore ? column.showDatatypeDetailsTableMore : column.showDatatypeDetails">
+
+  <div class="row m-0 pl-1 pr-1 pt-1">
+    <div class="col col-6 p-0 col-padding">
+      <label>Data type</label>
+    </div>
+    <div class="col col-3 p-0 col-padding">
+      <label>Length</label>
+    </div>
+    <div class="col col-3 p-0 col-padding">
+      <label>Precision</label>
+    </div>
+  </div>
+
+  <div class="row m-0 pl-1 pr-1">
+    <div class="col col-6 p-0 col-padding">
+      <select class="w-100 border border-secondary"
+              [(ngModel)]="datatype.dataType"
+              [id]="column.id + '_datatype'"
+              [name]="column.id + '_datatype'"
+              (change)="onDatatypeSelect($event)"
+              (click)="stopEvent($event)"
+              (mousedown)="stopEvent($event)"
+              style="max-width: 110px; max-height: 24px;">
+        <option value="-1">--Select data type--</option>
+        <optgroup *ngFor="let optgroup of dataTypeArray" [label]="optgroup.name">
+          <option *ngFor="let option of optgroup.datatypes" [value]="option.dataType"
+                  [selected]="datatype!== null && option.dataType === datatype.dataType">{{
+            option.dataType }}
+          </option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="col col-3 p-0 col-padding">
+      <input type="number"
+             class="w-100 border border-secondary data-type-extended-input"
+             [(ngModel)]="column.type.length"
+             [id]="column.id + '_length'"
+             [name]="column.id + '_length'"
+             [disabled]="datatype === null || !datatype.hasLength"
+             [readonly]="datatype === null || !datatype.hasLength"
+             (click)="stopEvent($event)"
+             (mousedown)="stopEvent($event)"
+             (keyup)="lengthInputKeyUp($event)"
+             (keydown)="stopEvent($event)">
+    </div>
+    <div class="col col-3 p-0 col-padding">
+      <input type="number"
+             class="w-100 border border-secondary data-type-extended-input"
+             [(ngModel)]="column.type.precision"
+             [id]="column.id + '_precision'"
+             [name]="column.id + '_precision'"
+             [readonly]="datatype === null || !datatype.hasPrecision || column.type.length === null || column.type.length === undefined || column.type.length === ''"
+             [disabled]="datatype === null || !datatype.hasPrecision || column.type.length === null || column.type.length === undefined || column.type.length === ''"
+             (mousedown)="stopEvent($event)"
+             (click)="stopEvent($event)"
+             (keyup)="precisionInputKeyUp($event)"
+             (keydown)="stopEvent($event)">
+    </div>
+  </div>
+</div>

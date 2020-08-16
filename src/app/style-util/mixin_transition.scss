@@ -1,0 +1,23 @@
+@mixin _transition($property, $time, $duration) {
+  -webkit-transition: $property $time $duration;
+  -moz-transition: $property $time $duration;
+  -ms-transition: $property $time $duration;
+  -o-transition: $property $time $duration;
+  transition: $property $time $duration;
+}
+
+@mixin double_transition($property_first, $property_second, $time, $duration) {
+  -webkit-transition: $property_first $time $duration, $property_second $time $duration;
+  -moz-transition: $property_first $time $duration, $property_second $time $duration;
+  -ms-transition: $property_first $time $duration, $property_second $time $duration;
+  -o-transition: $property_first $time $duration, $property_second $time $duration;
+  transition: $property_first $time $duration, $property_second $time $duration;
+}
+
+@mixin infinity_transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}

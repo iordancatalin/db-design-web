@@ -1,0 +1,34 @@
+@import "../../style-util/main_font";
+@import "../../style-util/mixin_transition";
+
+$bg-active-color: rgba(67, 125, 219, 0.3);
+
+.diagram-container {
+  box-shadow: 0 0 3px black;
+  @include double_transition(transform, box-shadow, 0.3s, ease-out);
+}
+
+.grid-mode {
+  width: 180px;
+  height: 210px;
+}
+
+.list-mode {
+  width: 220px;
+  height: 43px;
+}
+
+.diagram-container:hover {
+  box-shadow: 0 0 8px black;
+}
+
+.option-image {
+  width: 15px;
+  max-height: 13px;
+}
+
+.date-banner {
+  left: -1rem;
+  top: 0;
+  font-size: 11px;
+}

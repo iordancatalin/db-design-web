@@ -1,0 +1,1 @@
+import {Color} from '../graphics/color';export class ColorGenerator {  public static generateColor(): Color {    const red: number = Math.round(Math.random() * 255);    const green: number = Math.round(Math.random() * 255);    const blue: number = Math.round(Math.random() * 255);    return new Color(red, green, blue);  }}

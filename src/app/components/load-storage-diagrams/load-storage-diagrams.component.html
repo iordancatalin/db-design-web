@@ -1,0 +1,11 @@
+<div *ngFor="let wrapper of wrappers" tabindex="1" (click)="markWrapper(wrapper)" (dblclick)="selectWrapper(wrapper)"
+  class="alert pt-1 pb-1 mt-1 mb-0 cursor-pointer outline-none rounded-0" [ngClass]="{'alert-info': wrapper.active}">
+  <div class="row m-0">
+    <div class="col col-6">
+      {{wrapper.diagram.name}}
+    </div>
+    <div class="col col-6 d-flex justify-content-end align-items-center">
+      <span style="font-size: 11px;">{{wrapper.diagram.creationDate | date: 'MMM dd yyyy hh:mm'}}</span>
+    </div>
+  </div>
+</div>
